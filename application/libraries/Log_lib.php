@@ -22,8 +22,9 @@ class Log_lib{
     
     public function fetch_info($id = array())
     {
-    	return $this->CI->db->get_where('lend_admin', $id);
+    	$result = $this->CI->db->get_where('lend_admin', $id);
     	
+    	return array('count' => $result->num_rows(), 'data' => $result);
     }
 }
 ?>
