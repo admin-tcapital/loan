@@ -20,7 +20,7 @@
 				<?php $this->load->view('template/menu'); //load menus ?>
 			</div>
 		</div>
-		<?php $this->load->view('template/content'); //load content ?>
+		<?php $this->load->view($content); //load content ?>
 		<div class="clearFix"></div>
 		<div id="contentFooter">Copyright 2011. Northstar Solutions, Inc. All
 			Rights Reserved.
