@@ -11,16 +11,16 @@
 			<div style="width: 820px; margin-left: 200px;">
 				<div id="nslogo"></div>
 				<div id="appTitle">Lending System</div>
-				<div id="greeting">Hi {{user}} | logout</div>
+				<?php isset($_SESSION['lid']) ? $this->load->view('template/top-menu') : FALSE; //load top menus on user login ?>
 			</div>
 		</div>
 		<div id="navMenu">
 			<?php $this->load->view('template/location'); //load location ?>
 			<div>
-				<?php $this->load->view('template/menu'); //load menus ?>
+				<?php isset($_SESSION['lid']) ? $this->load->view('template/menu') : FALSE; //load menus on user login ?>
 			</div>
 		</div>
-		<?php $this->load->view($content); //load content ?>
+		<?php $this->load->view($content); //load page content ?>
 		<div class="clearFix"></div>
 		<div id="contentFooter">Copyright 2011. Northstar Solutions, Inc. All
 			Rights Reserved.
