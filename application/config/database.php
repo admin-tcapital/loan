@@ -48,8 +48,8 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'lending_admin';
-$db['default']['password'] = 'ph0ton-C@n0n44';
+$db['default']['username'] = 'root';
+$db['default']['password'] = '';
 $db['default']['database'] = 'lending';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
