@@ -1,10 +1,11 @@
 <?php
 
-class Template extends CI_Controller {
+class User extends CI_Controller {
 	
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->library('log_lib');
 	}
 	
 	function view() 
@@ -14,7 +15,6 @@ class Template extends CI_Controller {
 	
 	function register()
 	{
-		$this->load->library('log_lib');
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('username','Username','trim|xss_clean|required|callback_username_not_exist');
 		$this->form_validation->set_rules('password','Password','trim|xss_clean|required');
@@ -36,4 +36,17 @@ class Template extends CI_Controller {
 						}
 		}
 	}
+	
+	
+	function username_not_exist($username)
+		{
+			$this->form_validation->set_message('username_not_exist','That username already exist choose another username');
+			if($this->log_lib->check_exist_username($username))
+			{
+				return FALSE;
+			}else
+			{
+				return TRUE;
+			}
+		}
 }
