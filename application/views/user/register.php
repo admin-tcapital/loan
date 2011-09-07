@@ -6,7 +6,7 @@
 			<div class="midcontentBody">
 			<?php
 
-				echo form_open(base_url() . 'template/register');
+				echo form_open(base_url() . 'user/register');
 				$username = array(
 													'name' => 'username',
 													'id'	 => 'username',
