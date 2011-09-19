@@ -11,9 +11,9 @@ class Log_lib{
 
     public function log_user($username,$password)
     {
-    	$query_str = "SELECT * FROM lend_admin WHERE username='$username' and password='$password'";
-    	$result = $this->CI->db->query($query_str,array($username,$password));
-    	if($result->num_rows()>0){
+    	$result = $this->CI->db->get_where('lend_admin', array('username' => $username, 'password' => $password));
+    	
+    	if($result->num_rows() > 0){
     		return TRUE;
     	}else{
     		return FALSE;
