@@ -18,5 +18,15 @@ $hook['post_controller_constructor'][] = array(
 	'params'   => array()
 );
 
+//check if user was log in 
+$hook['post_controller_constructor'][] = array(
+	'class'    => 'User_check',
+	'function' => 'is_login',
+	'filename' => 'user_check.php',
+	'filepath' => 'hooks',
+	'params'   => array()
+);
+
+
 /* End of file hooks.php */
 /* Location: ./application/config/hooks.php */

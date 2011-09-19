@@ -110,6 +110,15 @@ body {
 	margin: 20px 10px 20px 50px;
 }
 
+input {
+}
+
+.error {
+	color: #BF0030;
+	font-style: italic;
+	font-size: 11px;
+}
+
 /*
  * Footer section
  */
@@ -123,6 +132,10 @@ body {
  /*
   * Widths
   */
+  .w400 {
+ 	width: 400px;
+ }
+ 
  .w500 {
  	width: 500px;
  }

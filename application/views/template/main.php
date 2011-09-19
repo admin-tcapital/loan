@@ -20,7 +20,7 @@
 				<?php isset($_SESSION['lid']) ? $this->load->view('template/menu') : FALSE; //load menus on user login ?>
 			</div>
 		</div>
-		<?php $this->load->view($content); //load page content ?>
+		<?php isset($data) ? $this->load->view($content, $data) : $this->load->view($content); //load page content ?>
 		<div class="clearFix"></div>
 		<div id="contentFooter">Copyright 2011. Northstar Solutions, Inc. All
 			Rights Reserved.
