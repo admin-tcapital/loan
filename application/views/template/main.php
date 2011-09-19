@@ -15,9 +15,9 @@
 			</div>
 		</div>
 		<div id="navMenu">
-			<?php $this->load->view('template/location'); //load location ?>
+			<?php $this->load->view('template/location', array('location' => $location)); //load location ?>
 			<div>
-				<?php isset($_SESSION['lid']) ? $this->load->view('template/menu') : FALSE; //load menus on user login ?>
+				<?php $this->load->view('template/menu', array('menu' => $menu)); //load menus on user login ?>
 			</div>
 		</div>
 		<?php isset($data) ? $this->load->view($content, $data) : $this->load->view($content); //load page content ?>

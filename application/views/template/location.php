@@ -1,1 +1,1 @@
-      	<div id="location">Home</div>
+      	<div id="location"><?php echo $location; ?></div>

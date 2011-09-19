@@ -16,7 +16,7 @@ class User extends CI_Controller {
 		if($this->form_validation->run() == FALSE)
 		{
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-			$this->load->view('template/main', array('content' => 'user/login'));
+			$this->load->view('template/main', array('content' => 'user/login', 'location' => 'Login', 'menu' => array('Register' => 'user/register')));
 		}
 		else
 		{
