@@ -108,10 +108,9 @@ body {
 
 .leftcontentBody {
 	width: 120px;
-	border-right: #AFAFAF 1px solid;
 	margin: 20px 10px 20px 10px;
 	float: left;
-	padding: 0 10px 20px 0;
+	padding: 0 0 20px 0;
 }
 	.leftcontentBody ul {
 		list-style: none;
@@ -130,9 +129,11 @@ body {
 	}
 
 .rightcontentBody {
-	width: 640px;
+	width: 650px;
 	margin: 20px 5px;
 	float: right;
+	border-left: #AFAFAF 1px solid;
+	padding-left: 15px;
 }
 
 .midcontentBody {
@@ -143,6 +144,19 @@ body {
 	color: #BF0030;
 	font-style: italic;
 	font-size: 11px;
+}
+
+/*
+ * Form Table
+ */
+.form_tbl tr {
+	padding: 5px;
+	height: 40px;
+}
+
+.form_tbl input {
+	width: 200px;
+	margin-left: 20px;
 }
 
 /*

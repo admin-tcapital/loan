@@ -11,7 +11,7 @@
 			<div style="width: 820px; margin-left: 200px;">
 				<div id="nslogo"></div>
 				<div id="appTitle">Lending System</div>
-				<?php isset($_SESSION['lid']) ? $this->load->view('template/top-menu') : FALSE; //load top menus on user login ?>
+				<?php isset($_SESSION['lend_user']) ? $this->load->view('template/top-menu') : FALSE; //load top menus on user login ?>
 			</div>
 		</div>
 		<div id="navMenu">
