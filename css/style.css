@@ -106,11 +106,37 @@ body {
 	color: WHITE;
 }
 
-.midcontentBody {
-	margin: 20px 10px 20px 50px;
+.leftcontentBody {
+	width: 120px;
+	border-right: #AFAFAF 1px solid;
+	margin: 20px 10px 20px 10px;
+	float: left;
+	padding: 0 10px 20px 0;
+}
+	.leftcontentBody ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.leftcontentBody ul li {
+	 	padding: 8px;
+	 	margin: 0;
+	 	border-bottom: #AFAFAF 1px solid;
+	}
+	
+	.leftcontentBody ul li a {
+	 	text-decoration: none;
+	}
+
+.rightcontentBody {
+	width: 640px;
+	margin: 20px 5px;
+	float: right;
 }
 
-input {
+.midcontentBody {
+	margin: 20px 0 20px 20px;
 }
 
 .error {
