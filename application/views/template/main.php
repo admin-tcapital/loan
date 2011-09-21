@@ -16,6 +16,10 @@
 <!-- jQuery -->
 <script type="text/javascript" src="<?php echo base_url() ?>jquery/jquery-1.6.4-min.js"></script>
 
+<!-- jQuery-UI -->
+<link type="text/css" href="<?php echo base_url(); ?>css/jquery-ui/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="<?php echo base_url() ?>jquery/jquery-ui-1.8.16.custom.min.js"></script>
+
 <!-- Table Sorter -->
 <link type="text/css" href="<?php echo base_url(); ?>css/tablesorter/style.css" rel="stylesheet" />
 <script type="text/javascript" src="<?php echo base_url() ?>jquery/plugins/jquery.tablesorter.min.js"></script>

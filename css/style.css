@@ -146,6 +146,15 @@ body {
 	font-size: 11px;
 }
 
+.lbutton {
+	width: 20px;
+	height: 20px;
+}
+
+td {
+	vertical-align:middle; 
+}
+
 /*
  * Form Table
  */
