@@ -9,7 +9,7 @@ class Stats extends CI_Controller {
 	
 	function index()
 	{
-		$this->load->view('template/main', array('content'=>'stats/index', 'location' => 'Home', 'menu' => array('Logout' => 'user/logout', 'Home' => 'stats')));
+		$this->load->view('template/main', array('content'=>'stats/index', 'location' => 'Home', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Home' => 'stats')));
 	}
 }
 

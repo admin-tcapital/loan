@@ -34,6 +34,16 @@ class User extends CI_Controller {
 			}
 		}
 	}
+	
+	function logout()
+	{
+		$sess_data = array(
+			'lend_user'	=> ''
+		);
+		$this->session->unset_userdata($sess_data);
+
+		redirect('/user/login/', 'refresh');
+	}
 
 	function register()
 	{
