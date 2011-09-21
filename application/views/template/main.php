@@ -10,8 +10,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title>Template</title>
-<link type="text/css" href="<?php echo base_url(); ?>css/style.css"
-	rel="stylesheet" />
+<!-- General CSS -->
+<link type="text/css" href="<?php echo base_url(); ?>css/style.css" rel="stylesheet" />
+
+<!-- jQuery -->
+<script type="text/javascript" src="<?php echo base_url() ?>jquery/jquery-1.6.4-min.js"></script>
+
+<!-- Table Sorter -->
+<link type="text/css" href="<?php echo base_url(); ?>css/tablesorter/style.css" rel="stylesheet" />
+<script type="text/javascript" src="<?php echo base_url() ?>jquery/plugins/jquery.tablesorter.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$( '.tablesorter' ).tablesorter(); //make table sortable
+	});
+</script>
 </head>
 <body>
 	<div id="content">
