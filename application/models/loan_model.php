@@ -62,6 +62,53 @@ class Loan_model extends CI_Model {
 	
 	// --------------------------------------------------------------------
 	
+	function calculate($amount, $loan_id, $loan_date)
+	{
+		//get loan parameters
+		$loan = $this->chk_loan_exist(array('id' => $loan_id));
+		
+		//interest
+		$amount_interest = $amount * ($loan->interest/100);
+		
+		//total payments applying interest
+		$amount_total = $amount + $amount_interest * $loan->terms;
+		
+		//payment per term
+		$amount_term = number_format(round($amount / $loan->terms, 2) + $amount_interest, 2, '.', ',');
+		
+		$date = $loan_date;
+		
+		//Loan info
+		$table = '<div id="calculator"><h3>Loan Info</h3>';
+		$table = $table . '<table>';
+		$table = $table . '<tr><td>Loan Name:</td><td>'.$loan->lname.'</td></tr>';
+		$table = $table . '<tr><td>Interest:</td><td>'.$loan->interest.'%</td></tr>';
+		$table = $table . '<tr><td>Terms:</td><td>'.$loan->terms.'</td></tr>';
+		$table = $table . '<tr><td>Frequency:</td><td>Every '.$loan->frequency.' days</td></tr>';
+		$table = $table . '</table>';
+		$table = $table . '<h3>Computation</h3>';
+		$table = $table . '<table>';
+		$table = $table . '<tr><td>Loan Amount:</td><td> &#8369;'.number_format($amount, 2, '.', ',').'</td></tr>';
+		$table = $table . '<tr><td>Interest:</td><td> &#8369;'.$amount_interest.'</td></tr>';
+		$table = $table . '<tr><td>Amount Per Term:</td><td> &#8369;'.$amount_term.'</td></tr>';
+		$table = $table . '<tr><td>Total Payment:</td><td> &#8369;'.number_format($amount_total, 2, '.', ',').'</td></tr>';
+		$table = $table . '</table>';
+		$table = $table . '<table border="1" cellpadding="5" cellspacing="0">';
+		$table = $table . '<tr><td>Payment #</td><td>Amount (&#8369;)</td><td>Payment Date</td></tr>';
+		for ($i = 1; $i <= $loan->terms; $i++)
+		{
+			$frequency = $loan->frequency * $i;
+			$newdate = strtotime ( '+'.$frequency.' day' , strtotime ( $date ) ) ;
+			$newdate = date ( 'm/d/Y' , $newdate );
+			$table = $table . '<tr><td>'.$i.'</td><td>'.$amount_term.'</td><td>'.$newdate.'</td></tr>';
+		}
+		$table = $table . '</table></div>';
+		
+		return $table;
+	}
+	
+	// --------------------------------------------------------------------
+	
 	/**
 	 * View entries in lend_loan table
 	 */

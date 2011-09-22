@@ -1,36 +1,40 @@
 		<?php 
-			$data = $this->Loan_model->chk_loan_exist(array('id' => $_GET['id']));
+			//get all loan type and display it on a dropdown
+			$loans = $this->Loan_model->view_all();
+			
+			$temp_arr = array();
+			$loan_types = array();
+			foreach ($loans->result() as $loan)
+			{
+				$temp_arr = array($loan->id => $loan->lname);
+				$loan_types = $loan_types + $temp_arr;
+			}
+			
 		?>
 		<div class="clearFix"></div>
 		<div class="contentBody">
-			<div class="contentTitle">Edit Loan Type</div>
+			<div class="contentTitle">Loan Calculator</div>
 			<div class="clearFix"></div>
 			<div class="leftcontentBody">
 				<ul>
 					<li><a href="<?php echo base_url(); ?>loan/add">Add New Loan</a></li>
 					<li><a href="<?php echo base_url(); ?>loan/view">View Loan Types</a></li>
-					<li><a href="<?php echo base_url(); ?>loan/calculator">Loan Calculator</a></li>
 				</ul>
 	        </div>
 	        <div class="rightcontentBody">
-	        	<?php if ($data): ?>
 	        	<form action="" method="post">
 	        		<table class="form_tbl">
 	        			<tr>
-	        				<td>Name:</td>
-	        				<td><input type="text" name="lname" value="<?php echo $data->lname; ?>" /></td>
+	        				<td>Loan Amout:</td>
+	        				<td><input type="text" name="amount" value="<?php echo set_value('amount'); ?>" /></td>
 	        			</tr>
 	        			<tr>
-	        				<td>Interest Rate (%):</td>
-	        				<td><input type="text" name="interest" value="<?php echo $data->interest; ?>" /></td>
+	        				<td>Select Loan Type:</td>
+	        				<td><?php echo form_dropdown('loan_type', $loan_types); ?></td>
 	        			</tr>
 	        			<tr>
-	        				<td>Terms:</td>
-	        				<td><input type="text" name="terms" value="<?php echo $data->terms; ?>" /></td>
-	        			</tr>
-	        			<tr>
-	        				<td>Frequency (days):</td>
-	        				<td><input type="text" name="frequency" value="<?php echo $data->frequency; ?>" /></td>
+	        				<td>Loan Date:</td>
+	        				<td><input type="text" name="loan_date" class="datepicker" value="<?php echo set_value('loan_date'); ?>" /></td>
 	        			</tr>
 	        			<tr>
 	        				<td></td>
@@ -57,11 +61,18 @@
 						</tr>
 						<?php endif;?>
 	        		</table>
-	        		<input type="hidden" name="id" value="<?php echo $_GET['id']; ?>" />
 	        	</form>
-	        	<?php else: ?>
-	        	<br>Sorry, loan doesn't exist.<br><br>
-	        	<?php endif; ?>
 	        </div>
 	        <div class="clearFix"></div>
 		</div>
+		<?php if (isset($result)): ?>
+		<div class="clearFix"></div>
+		<div class="contentBody w500">
+			<div class="contentTitle">Loan Result</div>
+			<div class="clearFix"></div>
+	        <div class="midcontentBody">
+	        	<?php echo $result; ?>
+	        </div>
+	        <div class="clearFix"></div>
+		</div>
+		<?php endif;?>

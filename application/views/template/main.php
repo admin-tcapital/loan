@@ -26,6 +26,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$( '.tablesorter' ).tablesorter(); //make table sortable
+		$( '.datepicker' ).datepicker(); //make datepicker
 	});
 </script>
 </head>

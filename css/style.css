@@ -8,8 +8,13 @@ body {
 .clearFix {
 	clear: both;
 }
-
-
+h3 {
+	margin-bottom: 0;
+	text-decoration: underline;
+}
+td {
+	vertical-align:middle; 
+}
 
 /*
  * Header section
@@ -151,8 +156,8 @@ body {
 	height: 20px;
 }
 
-td {
-	vertical-align:middle; 
+#calculator table{
+	margin-left: 20px;
 }
 
 /*
@@ -163,7 +168,7 @@ td {
 	height: 40px;
 }
 
-.form_tbl input {
+.form_tbl input, .form_tbl select {
 	width: 200px;
 	margin-left: 20px;
 }

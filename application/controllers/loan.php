@@ -88,7 +88,37 @@ class Loan extends CI_Controller {
 						redirect('loan/view', 'refresh');
 					}
 				} else {
-					$this->load->view('template/main', array('content' => 'loan/add', 'data' => array('error' => '<div class="error">Sorry, loan don\'t exist.</div>'), 'location' => 'Login', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Home' => 'stats')));
+					$this->load->view('template/main', array('content' => 'loan/edit', 'data' => array('error' => '<div class="error">Sorry, loan don\'t exist.</div>'), 'location' => 'Login', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Home' => 'stats')));
+				}
+			}
+		}
+	}
+	
+	function calculator()
+	{
+		//validation
+		$this->form_validation->set_rules('amount', 'Amount', 'trim|required|xss_clean|numeric');
+		$this->form_validation->set_rules('loan_type', 'Loan Type', 'trim|required|xss_clean|numeric');
+		$this->form_validation->set_rules('loan_date', 'Loan Date', 'trim|required|xss_clean');
+
+		if($this->form_validation->run() == FALSE)
+		{
+			//change validation error delimiters
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			$this->load->view('template/main', array('content' => 'loan/calculator', 'location' => 'Loan / Loan Calculator', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Home' => 'stats')));
+		}
+		else
+		{
+			if (isset($_POST['submit_loan'])) {
+				//check if loan name exist
+				$id = $this->input->post('loan_type');
+				$exist = $this->Loan_model->chk_loan_exist(array('id' => $id));
+				
+				if ($exist) {
+					$result = $this->Loan_model->calculate($this->input->post('amount'), $this->input->post('loan_type'), $this->input->post('loan_date'));
+					$this->load->view('template/main', array('content' => 'loan/calculator', 'data' => array('result' => $result), 'location' => 'Loan / Loan Calculator', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Home' => 'stats')));
+				} else {
+					$this->load->view('template/main', array('content' => 'loan/calculator', 'data' => array('error' => '<div class="error">Sorry, loan don\'t exist.</div>'), 'location' => 'Login', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Home' => 'stats')));
 				}
 			}
 		}
