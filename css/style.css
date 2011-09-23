@@ -160,6 +160,39 @@ td {
 	margin-left: 20px;
 }
 
+.frm_container {
+	margin-bottom: 10px;
+}
+.frm_heading {
+	font-size: 14px;
+	width: 400px;
+	border-bottom: 1px solid #F0F0F0;
+	font-weight: 900;
+}
+
+.frm_inputs {
+	padding-left: 15px;
+}
+
+.info_view tr td:first-child {
+	font-size: 12px;
+	padding-right: 10px;
+	text-align: right;
+	width: 120px; 
+	font-style: italic;
+	color: #6D6D6D;
+}
+
+.info_view tr td:nth-child(2) {
+	font-size: 13px;
+	color: #6D6D6D;
+}
+
+.manage_menu {
+	
+}
+
+
 /*
  * Form Table
  */
