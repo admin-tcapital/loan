@@ -36,7 +36,7 @@ CREATE TABLE `lend_admin` (
   `password` varchar(45) DEFAULT NULL,
   `rdate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,6 +45,7 @@ CREATE TABLE `lend_admin` (
 
 LOCK TABLES `lend_admin` WRITE;
 /*!40000 ALTER TABLE `lend_admin` DISABLE KEYS */;
+INSERT INTO `lend_admin` VALUES (1,'ambet','7ab14eb0555f896b51565a9324119084','2011-09-19 17:28:38'),(2,'ambet2','180a15a4ccb581bc489a94d1ab25a976','2011-09-19 21:03:06');
 /*!40000 ALTER TABLE `lend_admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,20 +60,21 @@ CREATE TABLE `lend_borrower` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `company` varchar(100) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
-  `phone` varchar(50) DEFAULT NULL,
+  `phone_cell` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `income` int(11) DEFAULT NULL,
+  `income` varchar(45) DEFAULT NULL,
   `civil_status` varchar(45) DEFAULT NULL,
   `sex` varchar(45) DEFAULT NULL,
-  `age` int(11) DEFAULT NULL,
+  `age` varchar(45) DEFAULT NULL,
   `employment_status` varchar(45) DEFAULT NULL,
   `job_title` varchar(45) DEFAULT NULL,
   `fname` varchar(45) DEFAULT NULL,
   `lname` varchar(45) DEFAULT NULL,
   `mi` varchar(45) DEFAULT NULL,
   `rdate` datetime DEFAULT NULL,
+  `birth_date` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,6 +83,7 @@ CREATE TABLE `lend_borrower` (
 
 LOCK TABLES `lend_borrower` WRITE;
 /*!40000 ALTER TABLE `lend_borrower` DISABLE KEYS */;
+INSERT INTO `lend_borrower` VALUES (1,'Northstar Solutions Inc.','San Pablo, Hagonoy bulacan','0015','seoblogger07@gmail.com','10000','Married',NULL,'25','Employed','Programmer','Lamberto','Guevarra','Ramos','2011-09-22 19:43:46','March 23, 1986'),(2,'Northstar Solutions Inc.','San Pablo, Hagonoy Bulacan dfgdfgdf dff fgdgd dg  dfgdfgdfgddf-df','09153234710','','','',NULL,'2','Unemployed','','Chino Julian','Guevarra','Estrada','2011-09-22 20:13:10','Oct. 28, 2010');
 /*!40000 ALTER TABLE `lend_borrower` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,11 +98,14 @@ CREATE TABLE `lend_borrower_loans` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `borrower_id` int(11) DEFAULT NULL,
   `loan_id` int(11) DEFAULT NULL,
-  `status` varchar(45) DEFAULT NULL,
-  `amount` int(11) DEFAULT NULL,
-  `rdate` datetime DEFAULT NULL,
+  `status` varchar(45) DEFAULT 'ACTIVE',
+  `loan_amount` float DEFAULT NULL,
+  `loan_amount_interest` float DEFAULT NULL,
+  `loan_amount_term` float DEFAULT NULL,
+  `loan_amount_total` float DEFAULT NULL,
+  `rdate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,6 +114,7 @@ CREATE TABLE `lend_borrower_loans` (
 
 LOCK TABLES `lend_borrower_loans` WRITE;
 /*!40000 ALTER TABLE `lend_borrower_loans` DISABLE KEYS */;
+INSERT INTO `lend_borrower_loans` VALUES (16,2,8,'ACTIVE',50000,1250,9583.33,57500,'2011-09-26 14:01:01'),(15,1,8,'ACTIVE',15000,375,2875,17250,'2011-09-26 09:50:24'),(14,1,8,'ACTIVE',15000,375,2875,17250,'2011-09-26 09:49:46'),(13,1,8,'ACTIVE',10000,250,1916.67,11500,'2011-09-23 14:14:36');
 /*!40000 ALTER TABLE `lend_borrower_loans` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,13 +127,14 @@ DROP TABLE IF EXISTS `lend_loan`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lend_loan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `loan_types` varchar(45) DEFAULT NULL,
-  `interest` int(11) DEFAULT NULL,
+  `lname` varchar(90) DEFAULT NULL,
+  `interest` float DEFAULT NULL,
   `terms` varchar(45) DEFAULT NULL,
+  `frequency` smallint(6) DEFAULT NULL,
   `late_fee` int(11) DEFAULT NULL,
   `rdate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,6 +143,7 @@ CREATE TABLE `lend_loan` (
 
 LOCK TABLES `lend_loan` WRITE;
 /*!40000 ALTER TABLE `lend_loan` DISABLE KEYS */;
+INSERT INTO `lend_loan` VALUES (8,'2.5% Interest',1.25,'12',15,NULL,'2011-09-22 14:59:48');
 /*!40000 ALTER TABLE `lend_loan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,14 +182,14 @@ DROP TABLE IF EXISTS `lend_payments`;
 CREATE TABLE `lend_payments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `borrower_id` int(11) DEFAULT NULL,
-  `loan_id` int(11) DEFAULT NULL,
-  `payment_sched` datetime DEFAULT NULL,
+  `borrower_loan_id` int(11) DEFAULT NULL,
+  `payment_sched` date DEFAULT NULL,
   `payment_number` int(11) DEFAULT NULL,
-  `amount` int(11) DEFAULT NULL,
-  `status` varchar(45) DEFAULT NULL,
-  `rdate` datetime DEFAULT NULL,
+  `amount` float DEFAULT NULL,
+  `status` varchar(45) DEFAULT 'UNPAID',
+  `rdate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,6 +198,7 @@ CREATE TABLE `lend_payments` (
 
 LOCK TABLES `lend_payments` WRITE;
 /*!40000 ALTER TABLE `lend_payments` DISABLE KEYS */;
+INSERT INTO `lend_payments` VALUES (15,1,13,'2011-12-22',3,1916.67,'UNPAID','2011-09-23 14:14:36'),(14,1,13,'2011-11-22',2,1916.67,'UNPAID','2011-09-23 14:14:36'),(13,1,13,'2011-10-23',1,1916.67,'UNPAID','2011-09-23 14:14:36'),(16,1,13,'2012-01-21',4,1916.67,'UNPAID','2011-09-23 14:14:36'),(17,1,13,'2012-02-20',5,1916.67,'UNPAID','2011-09-23 14:14:36'),(18,1,13,'2012-03-21',6,1916.67,'UNPAID','2011-09-23 14:14:36'),(19,1,14,'2011-10-26',1,2875,'UNPAID','2011-09-26 09:49:46'),(20,1,14,'2011-11-25',2,2875,'UNPAID','2011-09-26 09:49:47'),(21,1,14,'2011-12-25',3,2875,'UNPAID','2011-09-26 09:49:47'),(22,1,14,'2012-01-24',4,2875,'UNPAID','2011-09-26 09:49:47'),(23,1,14,'2012-02-23',5,2875,'UNPAID','2011-09-26 09:49:47'),(24,1,14,'2012-03-24',6,2875,'UNPAID','2011-09-26 09:49:47'),(25,1,15,'2011-10-26',1,2875,'UNPAID','2011-09-26 09:50:24'),(26,1,15,'2011-11-25',2,2875,'UNPAID','2011-09-26 09:50:24'),(27,1,15,'2011-12-25',3,2875,'UNPAID','2011-09-26 09:50:24'),(28,1,15,'2012-01-24',4,2875,'UNPAID','2011-09-26 09:50:24'),(29,1,15,'2012-02-23',5,2875,'UNPAID','2011-09-26 09:50:24'),(30,1,15,'2012-03-24',6,2875,'UNPAID','2011-09-26 09:50:24'),(31,2,16,'2011-10-26',1,9583.33,'UNPAID','2011-09-26 14:01:01'),(32,2,16,'2011-11-25',2,9583.33,'UNPAID','2011-09-26 14:01:01'),(33,2,16,'2011-12-25',3,9583.33,'UNPAID','2011-09-26 14:01:01'),(34,2,16,'2012-01-24',4,9583.33,'UNPAID','2011-09-26 14:01:01'),(35,2,16,'2012-02-23',5,9583.33,'UNPAID','2011-09-26 14:01:01'),(36,2,16,'2012-03-24',6,9583.33,'UNPAID','2011-09-26 14:01:01');
 /*!40000 ALTER TABLE `lend_payments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,4 +238,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-08-30 21:31:34
+-- Dump completed on 2011-11-07 16:22:44
