@@ -189,7 +189,16 @@ td {
 }
 
 .manage_menu {
-	
+	margin-right: 50px;
+	padding: 0 10px;
+	float: right;
+	border-left: 2px solid #284276;
+	border-right: 2px solid #284276;
+}
+
+.manage_menu span{
+	font-size: 12px;
+	margin-right: 5px;
 }
 
 

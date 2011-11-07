@@ -110,7 +110,7 @@ class Borrower_model extends CI_Model {
 	// --------------------------------------------------------------------
 	
 	/**
-	 * View entries in lend_loan table
+	 * View entries in lend_borrower table
 	 */
 	function view_all()
 	{
@@ -118,6 +118,83 @@ class Borrower_model extends CI_Model {
 		$return = $this->db->get('lend_borrower');
 		
 		return $return;
+	}
+	
+	// --------------------------------------------------------------------
+	
+	function get_borrower_loan($borrower_id)
+	{
+		$this->db->order_by('id');
+		$result = $this->db->get_where('lend_borrower_loans', array('borrower_id' => $borrower_id));
+		
+		if ($result->num_rows() > 0)
+		{
+			return $result;
+		} else {
+			return FALSE;		
+		}
+	}
+	
+	// --------------------------------------------------------------------
+	
+	function add_loan($param = array())
+	{
+		//set Time Zone
+		date_default_timezone_set('Asia/Manila');
+		
+		$amount = $param['loan_amount'];
+		
+		//get loan parameters
+		$loan = $this->Loan_model->chk_loan_exist(array('id' => $param['loan_id']));
+		
+		//interest
+		$amount_interest = $amount * ($loan->interest/100);
+		
+		//total payments applying interest
+		$amount_total = $amount + $amount_interest * $loan->terms;
+		
+		//payment per term
+		$amount_term = number_format(round($amount / $loan->terms, 2) + $amount_interest, 2, '.', '');
+		
+		$date = date('m/d/Y');
+		
+		//additional info to be insert
+		$add_info = array(
+						'loan_amount_interest' => $amount_interest,
+						'loan_amount_term' => $amount_term,
+						'loan_amount_total' => $amount_total
+					);
+					
+		$param = array_merge($param, $add_info);
+		
+		$insert = $this->db->insert('lend_borrower_loans', $param);
+		
+		//borrower_loan_id
+		$id = $this->db->insert_id();
+		
+		for ($i = 1; $i <= $loan->terms; $i++)
+		{
+			$frequency = $loan->frequency * $i;
+			$newdate = strtotime ( '+'.$frequency.' day' , strtotime ( $date ) ) ;
+			$newdate = date ( 'Y-m-d' , $newdate );
+			
+			$this->db->insert(
+				'lend_payments', array(
+					'borrower_id' => $param['borrower_id'],
+					'borrower_loan_id' => $id,
+					'payment_sched' => $newdate,
+					'payment_number' => $i,
+					'amount' => $amount_term
+				)
+			);
+			//$table = $table . '<tr><td>'.$i.'</td><td>'.$amount_term.'</td><td>'.$newdate.'</td></tr>';
+		}
+		
+		if ($insert) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
 	}
 	
 }

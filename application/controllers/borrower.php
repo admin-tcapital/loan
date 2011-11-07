@@ -7,6 +7,8 @@ class Borrower extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('Borrower_model');
+		
+		$this->load->model('Loan_model');
 	}
 	
 	function index()
@@ -31,17 +33,39 @@ class Borrower extends CI_Controller {
 	
 	function view()
 	{
-		$this->load->view(
-			'template/main', 
-			array(
-				'content'=>'borrower/view', 
-				'location' => 'Borrower / View', 
-				'menu' => array(
-					'Logout' => 'user/logout', 
-					'Loan' => 'loan/view', 
-					'Home' => 'stats')
-			)
-		);
+		//validation
+		$this->form_validation->set_rules('loan_amount', 'Amount', 'trim|required|xss_clean|numeric');
+		$this->form_validation->set_rules('loan_id', 'Loan Type', 'trim|required|xss_clean|numeric');
+		$this->form_validation->set_rules('borrower_id', 'Borrower', 'trim|required|xss_clean|numeric');
+		
+		if($this->form_validation->run() == FALSE)
+		{
+			//change validation error delimiters
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			$this->load->view(
+				'template/main', 
+				array(
+					'content'=>'borrower/view', 
+					'location' => 'Borrower / View', 
+					'menu' => array(
+						'Logout' => 'user/logout', 
+						'Loan' => 'loan/view', 
+						'Home' => 'stats')
+				)
+			);
+		}
+		else
+		{
+			if (isset($_POST['submit_borrower'])) {
+				//destroy submit_borrower from the POST array
+				unset($_POST['submit_borrower']);
+				//add loan
+				if ($this->Borrower_model->add_loan($_POST)) {
+					redirect('borrower/view/?id='.$this->input->post('borrower_id'), 'refresh');
+				}
+			}
+		}
+		
 	}
 	
 	function add()

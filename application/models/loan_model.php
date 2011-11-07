@@ -33,6 +33,23 @@ class Loan_model extends CI_Model {
 	// --------------------------------------------------------------------
 	
 	/**
+	 * Check for any record from lend_borrower_loans table based on given parameters
+	 * @param array $param
+	 * @return boolean
+	 */
+	function chk_borrower_loan_exist($param = array()) {
+		$exist = $this->db->get_where('lend_borrower_loans', $param);
+		
+		if ($exist->num_rows() > 0) {
+			return $exist->row();
+		} else {
+			return FALSE;
+		}
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
 	 * Add entry in lend_loan table
 	 * @param array $param
 	 */

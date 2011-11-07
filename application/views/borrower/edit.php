@@ -13,6 +13,8 @@
 	        </div>
 	        <div class="rightcontentBody">
 	        	<?php if ($data): ?>
+	        	<div class="manage_menu"><a href="<?php echo base_url();?>borrower/view/?id=<?php echo $_GET['id']; ?>" class="button_back">Back</a></div>
+	        	<div class="clearFix"></div>
 	        	<form action="" method="post">
 	        		<div class="frm_container">
 		        		<div class="frm_heading"><span>Personal Info</span></div>

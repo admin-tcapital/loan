@@ -24,6 +24,11 @@ class Loan extends CI_Controller {
 			);
 	}
 	
+	function view_info()
+	{
+		$this->load->view('template/main', array('content' => 'loan/info', 'location' => 'Loan / View', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Home' => 'stats')));
+	}
+	
 	function add()
 	{
 		//validation
