@@ -84,8 +84,24 @@ class Loan_model extends CI_Model {
 		//get loan parameters
 		$loan = $this->chk_loan_exist(array('id' => $loan_id));
 		
+		//divisor
+		switch ($loan->frequency) {
+			case 'Monthly':
+				$divisor = 1;
+				$days = 30;
+				break;
+			case '2 Weeks':
+				$divisor = 2;
+				$days = 15;
+				break;
+			case 'Weekly':
+				$divisor = 4;
+				$days = 7;
+				break;
+		}
+		
 		//interest
-		$amount_interest = $amount * ($loan->interest/100);
+		$amount_interest = $amount * ($loan->interest/100)/$divisor;
 		
 		//total payments applying interest
 		$amount_total = $amount + $amount_interest * $loan->terms;
@@ -106,7 +122,8 @@ class Loan_model extends CI_Model {
 		$table = $table . '<h3>Computation</h3>';
 		$table = $table . '<table>';
 		$table = $table . '<tr><td>Loan Amount:</td><td> &#8369;'.number_format($amount, 2, '.', ',').'</td></tr>';
-		$table = $table . '<tr><td>Interest:</td><td> &#8369;'.$amount_interest.'</td></tr>';
+		$table = $table . '<tr><td>Interest per Month:</td><td> &#8369;'.$amount_interest*$divisor.'</td></tr>';
+		$table = $table . '<tr><td>Interest per Term:</td><td> &#8369;'.$amount_interest.'</td></tr>';
 		$table = $table . '<tr><td>Amount Per Term:</td><td> &#8369;'.$amount_term.'</td></tr>';
 		$table = $table . '<tr><td>Total Payment:</td><td> &#8369;'.number_format($amount_total, 2, '.', ',').'</td></tr>';
 		$table = $table . '</table>';
@@ -114,7 +131,7 @@ class Loan_model extends CI_Model {
 		$table = $table . '<tr><td>Payment #</td><td>Amount (&#8369;)</td><td>Payment Date</td></tr>';
 		for ($i = 1; $i <= $loan->terms; $i++)
 		{
-			$frequency = $loan->frequency * $i;
+			$frequency = $days * $i;
 			$newdate = strtotime ( '+'.$frequency.' day' , strtotime ( $date ) ) ;
 			$newdate = date ( 'm/d/Y' , $newdate );
 			$table = $table . '<tr><td>'.$i.'</td><td>'.$amount_term.'</td><td>'.$newdate.'</td></tr>';

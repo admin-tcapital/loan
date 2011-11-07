@@ -147,8 +147,24 @@ class Borrower_model extends CI_Model {
 		//get loan parameters
 		$loan = $this->Loan_model->chk_loan_exist(array('id' => $param['loan_id']));
 		
+		//divisor
+		switch ($loan->frequency) {
+			case 'Monthly':
+				$divisor = 1;
+				$days = 30;
+				break;
+			case '2 Weeks':
+				$divisor = 2;
+				$days = 15;
+				break;
+			case 'Weekly':
+				$divisor = 4;
+				$days = 7;
+				break;
+		}
+		
 		//interest
-		$amount_interest = $amount * ($loan->interest/100);
+		$amount_interest = $amount * ($loan->interest/100)/$divisor;
 		
 		//total payments applying interest
 		$amount_total = $amount + $amount_interest * $loan->terms;
@@ -174,7 +190,7 @@ class Borrower_model extends CI_Model {
 		
 		for ($i = 1; $i <= $loan->terms; $i++)
 		{
-			$frequency = $loan->frequency * $i;
+			$frequency = $days * $i;
 			$newdate = strtotime ( '+'.$frequency.' day' , strtotime ( $date ) ) ;
 			$newdate = date ( 'Y-m-d' , $newdate );
 			

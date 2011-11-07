@@ -69,7 +69,7 @@ class Loan extends CI_Controller {
 		$this->form_validation->set_rules('lname', 'Loan Name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('interest', 'Interest', 'trim|required|xss_clean|numeric');
 		$this->form_validation->set_rules('terms', 'Terms', 'trim|required|xss_clean|numeric');
-		$this->form_validation->set_rules('frequency', 'Frequency', 'trim|required|xss_clean|numeric');
+		$this->form_validation->set_rules('frequency', 'Frequency', 'trim|required|xss_clean');
 
 		if($this->form_validation->run() == FALSE)
 		{

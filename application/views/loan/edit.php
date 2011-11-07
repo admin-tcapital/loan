@@ -30,7 +30,14 @@
 	        			</tr>
 	        			<tr>
 	        				<td>Frequency (days):</td>
-	        				<td><input type="text" name="frequency" value="<?php echo $data->frequency; ?>" /></td>
+	        				<td>
+	        					<select name="frequency">
+	        						<option value=""></option>
+	        						<option value="Monthly" <?php  echo $data->frequency == 'Monthly'? 'selected="selected"':''; ?>>Monthly</option>
+	        						<option value="2 Weeks" <?php  echo $data->frequency == '2 Weeks'? 'selected="selected"':''; ?>>2 Weeks</option>
+	        						<option value="Weekly" <?php  echo $data->frequency == 'Weekly'? 'selected="selected"':''; ?>>Weekly</option>
+	        					</select>
+	        				</td>
 	        			</tr>
 	        			<tr>
 	        				<td></td>
