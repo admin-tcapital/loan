@@ -55,5 +55,65 @@ class Log_lib{
 			return FALSE;
 		}
 	}
+	
+	public function manage_user()
+	{
+		$query = "SELECT * from lend_admin";
+		$result = $this->CI->db->query($query );
+		if($result->num_rows() > 0)
+		{
+			return $result;
+		}else
+		{
+			return FALSE;
+		}
+		
+	}
+	
+
+	public function delete_user($id)
+	{
+		$query = "DELETE FROM lend_admin WHERE id = '$id'";
+		$result = $this->CI->db->query($query);
+		if($result)
+		{
+			return $result;
+		}else
+		{
+			return FALSE;
+		}
+		
+	}
+	
+	
+
+	public function edit_user($id)
+	{
+		$query = "SELECT * FROM lend_admin WHERE id = '$id'";
+		$result = $this->CI->db->query($query);
+		if($result)
+		{
+			return $result;
+		}else
+		{
+			return FALSE;
+		}
+		
+	}
+	
+
+	public function update_user($id,$username)
+	{
+		$query = "UPDATE lend_admin SET username = '$username' WHERE id = '$id'";
+		$result = $this->CI->db->query($query);
+		if($result)
+		{
+			return TRUE;
+		}else
+		{
+			return FALSE;
+		}
+		
+	}
 }
 ?>
