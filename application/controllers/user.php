@@ -52,6 +52,8 @@ class User extends CI_Controller {
 	function register()
 	{
 		$this->load->library('form_validation');
+		$this->form_validation->set_rules('fname','First Name','trim|xss_clean|required');
+		$this->form_validation->set_rules('lname','Last Name','trim|xss_clean|required');
 		$this->form_validation->set_rules('username','Username','trim|xss_clean|required|callback_username_not_exist');
 		$this->form_validation->set_rules('password','Password','trim|xss_clean|required');
 		$this->form_validation->set_rules('password_conf','Confirm Password','trim||xss_clean|required|matches[password]');
@@ -62,7 +64,9 @@ class User extends CI_Controller {
 		{
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
-			if($this->log_lib->register_user($username,$password))
+			$fname = $this->input->post('fname');
+			$lname = $this->input->post('lname');
+			if($this->log_lib->register_user($username,$password,$fname,$lname))
 			{
 				$this->session->set_flashdata('insertdata', 'The data was inserted');
 				$this->load->view('template/main',array('content'=>'user/register'));
@@ -101,10 +105,23 @@ class User extends CI_Controller {
 	}
 	
 
-	function user_delete($id)
+	function user_diactivate($id)
 	{
 		
-		if($this->log_lib->delete_user($id))
+		if($this->log_lib->diactivate_user($id))
+		{
+			$data['manage_user'] = $this->log_lib->manage_user();
+			$this->load->view('template/main',array('content'=>'user/manage_user','data'=>$data['manage_user']));
+		}else
+		{
+			return  FALSE;
+		}
+	}
+	
+	function user_activate($id)
+	{
+		
+		if($this->log_lib->activate_user($id))
 		{
 			$data['manage_user'] = $this->log_lib->manage_user();
 			$this->load->view('template/main',array('content'=>'user/manage_user','data'=>$data['manage_user']));
@@ -131,16 +148,18 @@ class User extends CI_Controller {
 	function user_update($id)
 	{
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('username','Username','trim|xss_clean|required');
+		$this->form_validation->set_rules('fname','First Name','trim|xss_clean|required');
+		$this->form_validation->set_rules('lname','Last Name','trim|xss_clean|required');
 		if($this->form_validation->run() == FALSE)
 		{
-		$this->load->view('template/main',array('content'=>'user/edit_user','data'=>$data));
+		$this->load->view('template/main',array('content'=>'user/edit_user','data'=>NULL));
 		}else 
 		{
-			$username = $this->input->post('username');
+			$fname = $this->input->post('fname');
+			$lname = $this->input->post('lname');
 			if(isset($_POST['update']))
 			{
-				if($this->log_lib->update_user($id,$username))
+				if($this->log_lib->update_user($id,$fname,$lname))
 				{
 					$data['manage_user'] = $this->log_lib->manage_user();
 					$this->load->view('template/main',array('content'=>'user/manage_user','data'=>$data['manage_user']));
