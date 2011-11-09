@@ -12,7 +12,7 @@ class Log_lib{
 	{
 		$password = md5($password.config_item('encryption_key'));
 
-		$result = $this->CI->db->get_where('lend_admin', array('username' => $username, 'password' => $password));
+		$result = $this->CI->db->get_where('lend_admin', array('username' => $username, 'password' => $password,'status'=>'ACTIVE'));
 		 
 		if($result->num_rows() > 0){
 			return TRUE;
@@ -28,13 +28,13 @@ class Log_lib{
 		return array('count' => $result->num_rows(), 'data' => $result);
 	}
 
-	public function register_user($username,$password)
+	public function register_user($username,$password,$fname,$lname)
 	{
 		 
 		$key = config_item('encryption_key');
 		$password = md5($password.$key);
-		$query_str =  "INSERT INTO  lend_admin (username,password,rdate) Values (?,?,NOW())";
-		if($this->CI->db->query($query_str,array($username,$password))){
+		$query_str =  "INSERT INTO  lend_admin (fname,lname,username,password,rdate) Values (?,?,?,?,NOW())";
+		if($this->CI->db->query($query_str,array($fname,$lname,$username,$password))){
 			return TRUE;
 		}
 		else
@@ -71,9 +71,24 @@ class Log_lib{
 	}
 	
 
-	public function delete_user($id)
+	public function diactivate_user($id)
 	{
-		$query = "DELETE FROM lend_admin WHERE id = '$id'";
+		$query = "UPDATE lend_admin SET status = 'INACTIVE' WHERE id = '$id'";
+		$result = $this->CI->db->query($query);
+		if($result)
+		{
+			return $result;
+		}else
+		{
+			return FALSE;
+		}
+		
+	}
+	
+
+	public function activate_user($id)
+	{
+		$query = "UPDATE lend_admin SET status = 'ACTIVE' WHERE id = '$id'";
 		$result = $this->CI->db->query($query);
 		if($result)
 		{
@@ -102,9 +117,9 @@ class Log_lib{
 	}
 	
 
-	public function update_user($id,$username)
+	public function update_user($id,$fname,$lname)
 	{
-		$query = "UPDATE lend_admin SET username = '$username' WHERE id = '$id'";
+		$query = "UPDATE lend_admin SET fname = '$fname',lname =  '$lname'  WHERE id = '$id'";
 		$result = $this->CI->db->query($query);
 		if($result)
 		{
