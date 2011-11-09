@@ -85,4 +85,72 @@ class User extends CI_Controller {
 			return TRUE;
 		}
 	}
+	
+
+	function user_manager()
+	{
+		
+		if($this->log_lib->manage_user())
+		{
+			$data['manage_user'] = $this->log_lib->manage_user();
+			$this->load->view('template/main',array('content'=>'user/manage_user','data'=>$data['manage_user']));
+		}else
+		{
+			return  FALSE;
+		}
+	}
+	
+
+	function user_delete($id)
+	{
+		
+		if($this->log_lib->delete_user($id))
+		{
+			$data['manage_user'] = $this->log_lib->manage_user();
+			$this->load->view('template/main',array('content'=>'user/manage_user','data'=>$data['manage_user']));
+		}else
+		{
+			return  FALSE;
+		}
+	}
+	
+
+	function user_edit($id)
+	{
+		
+		if($this->log_lib->edit_user($id))
+		{
+			$data = $this->log_lib->edit_user($id);
+			$this->load->view('template/main',array('content'=>'user/edit_user','data'=>$data));
+		}else
+		{
+			return  FALSE;
+		}
+	}
+	
+	function user_update($id)
+	{
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('username','Username','trim|xss_clean|required');
+		if($this->form_validation->run() == FALSE)
+		{
+		$this->load->view('template/main',array('content'=>'user/edit_user','data'=>$data));
+		}else 
+		{
+			$username = $this->input->post('username');
+			if(isset($_POST['update']))
+			{
+				if($this->log_lib->update_user($id,$username))
+				{
+					$data['manage_user'] = $this->log_lib->manage_user();
+					$this->load->view('template/main',array('content'=>'user/manage_user','data'=>$data['manage_user']));
+					return TRUE;
+				}else 
+				{
+					return FALSE;
+				}
+			}
+		
+		}
+	}
 }
