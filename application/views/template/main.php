@@ -11,7 +11,7 @@
 <head>
 <title>Template</title>
 <!-- Favicon -->
-<link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico" />
+<link rel="shortcut icon" href="<?php echo base_url(); ?>fav.ico" />
 
 <!-- General CSS -->
 <link type="text/css" href="<?php echo base_url(); ?>css/style.css" rel="stylesheet" />
