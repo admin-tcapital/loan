@@ -7,6 +7,19 @@
 			<?php
 
 				echo form_open(base_url() . 'user/register');
+				
+				$fname = array(
+													'name' => 'fname',
+													'id'	 => 'fname',
+													'value'	 => ''
+												);
+												
+				$lname = array(
+													'name' => 'lname',
+													'id'	 => 'lname',
+													'value'	 => ''
+												);
+				
 				$username = array(
 													'name' => 'username',
 													'id'	 => 'username',
@@ -32,6 +45,22 @@
 			
 			
 			<table>
+				<tr>
+					<td>
+						First Name:
+					</td>
+					<td>
+						 <?php echo form_input($fname); ?>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Last Name:
+					</td>
+					<td>
+						 <?php echo form_input($lname); ?>
+					</td>
+				</tr>
 				<tr>
 					<td>
 						Username:
