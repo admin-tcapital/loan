@@ -38,7 +38,13 @@ class Loan_model extends CI_Model {
 	 * @return boolean
 	 */
 	function chk_borrower_loan_exist($param = array()) {
-		$exist = $this->db->get_where('lend_borrower_loans', $param);
+		$this->db->select('*, lend_borrower_loans.id as borrower_loan_id, lend_borrower_loan_settings.lname as loan_name');
+		$this->db->from('lend_borrower_loans');
+		$this->db->join('lend_borrower_loan_settings', 'lend_borrower_loans.id = lend_borrower_loan_settings.borrower_loan_id');
+		$this->db->join('lend_borrower', 'lend_borrower.id = lend_borrower_loans.borrower_id');
+		$this->db->where($param);
+		
+		$exist = $this->db->get();
 		
 		if ($exist->num_rows() > 0) {
 			return $exist->row();
@@ -152,6 +158,54 @@ class Loan_model extends CI_Model {
 		$return = $this->db->get('lend_loan');
 		
 		return $return;
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Calculate payments made
+	 */
+	function payments_made($loan_id)
+	{
+		$this->db->select('sum(amount) as total');
+		$amount = $this->db->get_where('lend_payments', array('borrower_loan_id' => $loan_id, 'status' => 'PAID'));
+		
+		if ($amount->num_rows() > 0) {
+			$amount = $amount->row();
+			
+			return $amount->total;
+		} else {
+			return FALSE;
+		}
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Calculate next paymentinfo
+	 */
+	function next_payment($borrower_loan_id)
+	{
+		$this->db->order_by('payment_number');
+		$loan = $this->db->get_where('lend_payments', array('borrower_loan_id' => $borrower_loan_id, 'status' => 'UNPAID'));
+		
+		if ($loan->num_rows() > 0) {
+			$loan = $loan->row();
+			
+			return $loan;
+		} else {
+			return FALSE;
+		}
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * View entries in lend_loan table
+	 */
+	function view_transactions($loan_id)
+	{
+		return TRUE;
 	}
 	
 }

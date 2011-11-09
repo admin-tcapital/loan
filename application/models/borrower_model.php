@@ -188,6 +188,20 @@ class Borrower_model extends CI_Model {
 		//borrower_loan_id
 		$id = $this->db->insert_id();
 		
+		//copy loan parameters to lend_borrower_loan_settings table
+		$this->db->insert(
+			'lend_borrower_loan_settings', array(
+				'loan_id' => $loan->id,
+				'borrower_loan_id' => $id,
+				'lname' => $loan->lname,
+				'interest' => $loan->interest,
+				'terms' => $loan->terms,
+				'frequency' => $loan->frequency,
+				'late_fee' => $loan->late_fee
+			)
+		);
+		
+		//insert each payment records to lend_payments
 		for ($i = 1; $i <= $loan->terms; $i++)
 		{
 			$frequency = $days * $i;
