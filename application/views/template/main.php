@@ -10,6 +10,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title>Template</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico" />
+
 <!-- General CSS -->
 <link type="text/css" href="<?php echo base_url(); ?>css/style.css" rel="stylesheet" />
 
