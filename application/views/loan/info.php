@@ -53,6 +53,8 @@
         		<?php 
 					$payment = $this->Loan_model->next_payment($loan->borrower_loan_id);
 				?>
+				<div class="manage_menu"><a href="<?php echo base_url();?>transaction/payment/?id=<?php echo $payment->id; ?>" class="button_cart">Payment</a></div>
+				<div class="clearFix"></div>
         		<div class="frm_container">
 	        		<div class="frm_heading"><span>Schedule Payment</span></div>
 	        		<div class="frm_inputs">

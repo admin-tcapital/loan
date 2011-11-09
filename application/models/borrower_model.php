@@ -220,6 +220,10 @@ class Borrower_model extends CI_Model {
 			//$table = $table . '<tr><td>'.$i.'</td><td>'.$amount_term.'</td><td>'.$newdate.'</td></tr>';
 		}
 		
+		//get next payment id and insert to lend_borrower_loans.next_payment_id
+		$payment = $this->Loan_model->next_payment($id);
+		$this->db->update('lend_borrower_loans', array('next_payment_id' => $payment->id), array('id' => $id));
+		
 		if ($insert) {
 			return TRUE;
 		} else {

@@ -208,4 +208,86 @@ class Loan_model extends CI_Model {
 		return TRUE;
 	}
 	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Get all overdue payments
+	 */
+	function get_due_payments()
+	{
+		$due = $this->db->query(
+			'
+			SELECT c.fname, c.lname, c.id as \'borrower_id\', a.id as \'borrower_loan_id\', b.amount, b.payment_number, b.payment_sched 
+			FROM lend_borrower_loans a 
+			INNER JOIN lend_payments b
+			  ON a.next_payment_id = b.id
+			INNER JOIN lend_borrower c
+			  ON a.borrower_id = c.id
+			WHERE b.payment_sched < DATE(NOW())
+			  AND a.status = \'ACTIVE\'
+			'
+		);
+		
+		if ($due->num_rows() > 0) {
+			return $due;
+		} else {
+			return FALSE;
+		}
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Get all today's due payments
+	 */
+	function get_due_payments_now()
+	{
+		$due = $this->db->query(
+			'
+			SELECT c.fname, c.lname, c.id as \'borrower_id\', a.id as \'borrower_loan_id\', b.amount, b.payment_number, b.payment_sched 
+			FROM lend_borrower_loans a 
+			INNER JOIN lend_payments b
+			  ON a.next_payment_id = b.id
+			INNER JOIN lend_borrower c
+			  ON a.borrower_id = c.id
+			WHERE b.payment_sched = DATE(NOW())
+			  AND a.status = \'ACTIVE\'
+			'
+		);
+		
+		if ($due->num_rows() > 0) {
+			return $due;
+		} else {
+			return FALSE;
+		}
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Get all due payments on current week
+	 */
+	function get_due_payments_week()
+	{
+		$due = $this->db->query(
+			'
+			SELECT c.fname, c.lname, c.id as \'borrower_id\', a.id as \'borrower_loan_id\', b.amount, b.payment_number, b.payment_sched 
+			FROM lend_borrower_loans a 
+			INNER JOIN lend_payments b
+			  ON a.next_payment_id = b.id
+			INNER JOIN lend_borrower c
+			  ON a.borrower_id = c.id
+			WHERE WEEK(b.payment_sched) + YEAR(b.payment_sched) = WEEK(NOW()) + YEAR(NOW())
+			  AND a.status = \'ACTIVE\'
+			'
+		);
+		
+		if ($due->num_rows() > 0) {
+			return $due;
+		} else {
+			return FALSE;
+		}
+	}
+	
+	
 }

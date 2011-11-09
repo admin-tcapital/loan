@@ -5,6 +5,8 @@ class Stats extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		
+		$this->load->model('Loan_model');
 	}
 	
 	function index()

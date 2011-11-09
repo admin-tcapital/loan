@@ -35,6 +35,7 @@
 		$( '.button_edit' ).button({ icons: {primary:'ui-icon-pencil'} });
 		$( '.button_add' ).button({ icons: {primary:'ui-icon-plus'} });
 		$( '.button_back' ).button({ icons: {primary:'ui-icon-triangle-1-w'} });
+		$( '.button_cart' ).button({ icons: {primary:'ui-icon-cart'} });
 	});
 </script>
 </head>
