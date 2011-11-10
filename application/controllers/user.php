@@ -90,7 +90,53 @@ class User extends CI_Controller {
 		}
 	}
 	
+	
+	
+	
 
+	function search_info()
+	{
+		$this->form_validation->set_rules('search', 'Search', 'trim|required|xss_clean');
+		if($this->form_validation->run() == FALSE)
+		{
+			$this->load->view('template/main', array('content' => 'user/search'));
+		}
+		else
+		{	
+			if (isset($_POST['search_but'])) {
+				$search = $this->input->post('search');
+				$option= $this->input->post('option');
+					if($this->log_lib->search_loan($search,$option))
+					{
+						$data['view_loan']=$this->log_lib->search_loan($search,$option);
+						$this->load->view('template/main', array('content' => 'user/search','data'=>$data['view_loan']));
+						return TRUE;
+					}else
+					{
+						$this->load->view('template/main', array('content' => 'user/search','data'=>NULL));
+						return FALSE;
+					}
+				
+			}
+		}
+	}
+	
+
+	function loan_view($id)
+	{
+		
+		if($this->log_lib->view_loan($id))
+		{
+			$data['view_loan'] = $this->log_lib->view_loan($id);
+			$this->load->view('template/main',array('content'=>'user/view_borrower','data'=>$data['view_loan']));
+		}else
+		{
+			return  FALSE;
+		}
+	}
+	
+	
+	
 	function user_manager()
 	{
 		
