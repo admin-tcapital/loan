@@ -130,5 +130,51 @@ class Log_lib{
 		}
 		
 	}
+	
+	
+
+	public function search_loan($search,$option,$filter=NULL)
+	{
+		
+		if($option == 'id')
+		{
+			$filter.="lend_borrower.id = '$search'";
+		}else 
+		{
+			$filter.="fname like '%$search%'";
+		}
+		
+		$query = "select
+					lend_borrower_loans.borrower_id,loan_id,status,loan_amount,loan_amount_interest,loan_amount_term,loan_amount_total,lend_borrower.id as borrower_id,company,address,
+					phone_cell,email,income,civil_status,sex,age,employment_status,job_title,fname,lname,mi,lend_borrower.rdate,birth_date from lend_borrower inner join 
+					lend_borrower_loans on lend_borrower.id = lend_borrower_loans.borrower_id WHERE $filter ";
+		$result = $this->CI->db->query($query);
+		if($result)
+		{
+			return $result;
+		}else
+		{
+			return FALSE;
+		}
+		
+	}
+	
+
+	public function view_loan($id)
+	{
+		$query = "select
+					lend_borrower_loans.borrower_id,loan_id,status,loan_amount,loan_amount_interest,loan_amount_term,loan_amount_total,lend_borrower.id as borrower_id,company,address,
+					phone_cell,email,income,civil_status,sex,age,employment_status,job_title,fname,lname,mi,lend_borrower.rdate,birth_date from lend_borrower inner join 
+					lend_borrower_loans on lend_borrower.id = lend_borrower_loans.borrower_id WHERE lend_borrower.id = '$id' ";
+		$result = $this->CI->db->query($query);
+		if($result)
+		{
+			return $result;
+		}else
+		{
+			return FALSE;
+		}
+		
+	}
 }
 ?>
