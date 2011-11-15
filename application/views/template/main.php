@@ -56,6 +56,7 @@
 			<div>
 				<?php $this->load->view('template/menu', array('menu' => $menu)); //load menus on user login ?>
 			</div>
+			<?php if ($this->router->class != 'user') : ?>
 			<div class="clearFix"></div>
 			<div class="contentSearch">
 				<div id="search_label">SEARCH</div>
@@ -68,6 +69,7 @@
 					</table>
 				</form>
 			</div>
+			<?php endif; ?>
 		</div>
 		
 		<?php isset($data) ? $this->load->view($content, $data) : $this->load->view($content); //load page content ?>

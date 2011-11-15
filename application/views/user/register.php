@@ -61,7 +61,7 @@
 					<td>  <?php echo form_submit(array('name' => 'submit_name', 'id' => 'submit_id', ), 'Register'); ?></td>
 				</tr>
 			</table>
-			<tabe>
+			<table>
 				<tr>
 					<td>
 						 <font color="#AA0000" face="Arial">
