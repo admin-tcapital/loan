@@ -93,15 +93,15 @@
 			        		</thead>
 			        		<tbody>
 			        			<?php $trans = $this->Loan_model->view_transactions($_GET['id']);?>
-			        			<?php //foreach ($trans->result() as $transact) :?>
+			        			<?php foreach ($trans->result() as $transact) :?>
 			        			<tr>
-			        				<td></td>
-			        				<td></td>
-			        				<td></td>
-			        				<td></td>
-			        				<td></td>
+			        				<td><?php echo $transact->transaction_id; ?></td>
+			        				<td><?php echo $transact->transaction_date; ?></td>
+			        				<td><?php echo $transact->username; ?></td>
+			        				<td><?php echo 'Description'; ?></td>
+			        				<td><?php echo $transact->amount; ?></td>
 			        			</tr>
-			        			<?php //endforeach; ?>
+			        			<?php endforeach; ?>
 			        		</tbody>
 			        	</table>
 	        		</div>

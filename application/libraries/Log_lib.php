@@ -15,7 +15,7 @@ class Log_lib{
 		$result = $this->CI->db->get_where('lend_admin', array('username' => $username, 'password' => $password));
 		 
 		if($result->num_rows() > 0){
-			return TRUE;
+			return $result->row();
 		}else{
 			return FALSE;
 		}

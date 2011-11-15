@@ -27,6 +27,7 @@ class User extends CI_Controller {
 
 				if ($login) {
 					$this->session->set_userdata('lend_user', md5($_POST['username'].config_item('encryption_key')));
+					$this->session->set_userdata('lend_user_id', $login->id);
 					if (isset($_GET['url'])) {
 						redirect('http://'.$_SERVER['SERVER_NAME'].urldecode($_GET['url']));
 					} else {

@@ -205,7 +205,13 @@ class Loan_model extends CI_Model {
 	 */
 	function view_transactions($loan_id)
 	{
-		return TRUE;
+		$this->db->select('*, lend_transactions.id as transaction_id, lend_transactions.rdate as transaction_date');
+		$this->db->from('lend_transactions');
+		$this->db->join('lend_payments', 'lend_transactions.payment_id = lend_payments.id');
+		$this->db->join('lend_admin', 'lend_admin.id = lend_transactions.admin_id');
+		$this->db->where(array('lend_payments.borrower_loan_id' => $loan_id));
+		
+		return $this->db->get();
 	}
 	
 	// --------------------------------------------------------------------
