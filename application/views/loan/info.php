@@ -7,8 +7,12 @@
 			<div class="clearFix"></div>
 			<div class="leftcontentBody">
 				<ul>
-					<li><a href="<?php echo base_url(); ?>loan/view">View Loan Types</a></li>
-					<li><a href="<?php echo base_url(); ?>loan/calculator">Loan Calculator</a></li>
+					<li><a href="<?php echo base_url(); ?>loan/view/">Loan</a></li>
+					<li><a href="<?php echo base_url(); ?>borrower/">Borrower</a></li>
+					<li class="submenu"><a href="<?php echo base_url(); ?>borrower/add">Add Borrower</a></li>
+					<li class="submenu"><a href="<?php echo base_url(); ?>borrower/viewall">View Borrowers</a></li>
+					<li><a href="<?php echo base_url(); ?>stats/payments">Payments</a></li>
+					<li><a href="<?php echo base_url(); ?>stats/transactions">Transactions</a></li>
 				</ul>
 	        </div>
 	        <div class="rightcontentBody">
@@ -26,7 +30,7 @@
 		        			</tr>
 		        			<tr>
 		        				<td>Borrower:</td>
-		        				<td><?php echo $loan->lname.', '.$loan->fname; ?></td>
+		        				<td><a href="<?php echo base_url(); ?>borrower/view/?id=<?php echo $loan->borrower_id;?>"><?php echo $loan->lname.', '.$loan->fname; ?></a></td>
 		        			</tr>
 		        			<tr>
 		        				<td>Status:</td>
@@ -53,11 +57,14 @@
         		<?php 
 					$payment = $this->Loan_model->next_payment($loan->borrower_loan_id);
 				?>
+				<?php if ($payment) : ?>
 				<div class="manage_menu"><a href="<?php echo base_url();?>transaction/payment/?id=<?php echo $payment->id; ?>" class="button_cart">Payment</a></div>
+				<?php endif; ?>
 				<div class="clearFix"></div>
         		<div class="frm_container">
 	        		<div class="frm_heading"><span>Schedule Payment</span></div>
 	        		<div class="frm_inputs">
+	        			<?php if ($payment) : ?>
 		        		<table class="info_view">
 		        			<tr>
 		        				<td>Payment #:</td>
@@ -76,6 +83,9 @@
 		        				<td><?php echo $payment->status; ?></td>
 		        			</tr>
 		        		</table>
+		        		<?php else : ?>
+		        		No scheduled payment.
+		        		<?php endif; ?>
 	        		</div>
         		</div>
         		<div class="frm_container">

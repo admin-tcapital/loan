@@ -56,7 +56,20 @@
 			<div>
 				<?php $this->load->view('template/menu', array('menu' => $menu)); //load menus on user login ?>
 			</div>
+			<div class="clearFix"></div>
+			<div class="contentSearch">
+				<div id="search_label">SEARCH</div>
+				<form>
+					<table>
+						<tr>
+							<td>Loan #: <input type="text" name="loan_id" /><input type="submit" name="submit_search_loan" value="GO" /></td>
+							<td>Customer Name: <input type="text" name="customer_name" /><input type="submit" name="submit_search_name" value="GO" /></td>
+						</tr>
+					</table>
+				</form>
+			</div>
 		</div>
+		
 		<?php isset($data) ? $this->load->view($content, $data) : $this->load->view($content); //load page content ?>
 		<div class="clearFix"></div>
 		<div id="contentFooter">Copyright 2011. Northstar Solutions, Inc. All
