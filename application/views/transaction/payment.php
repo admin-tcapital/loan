@@ -9,7 +9,7 @@
 					<li class="submenu"><a href="<?php echo base_url(); ?>borrower/add">Add Borrower</a></li>
 					<li class="submenu"><a href="<?php echo base_url(); ?>borrower/viewall">View Borrowers</a></li>
 					<li><a href="<?php echo base_url(); ?>stats/payments">Payments</a></li>
-					<li><a href="<?php echo base_url(); ?>stats/transactions">Transactions</a></li>
+					
 				</ul>
 	        </div>
 	        <div class="rightcontentBody">

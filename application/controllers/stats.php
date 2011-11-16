@@ -7,6 +7,8 @@ class Stats extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('Loan_model');
+		
+		$this->load->model('Payment_model');
 	}
 	
 	function index()
@@ -20,7 +22,7 @@ class Stats extends CI_Controller {
 	 * View all future payments
 	 * 
 	 */
-	function payments()
+	function payments($action = NULL)
 	{
 		$this->load->view(
 			'template/main', 
@@ -35,5 +37,6 @@ class Stats extends CI_Controller {
 				)
 			);
 	}
+	
 }
 

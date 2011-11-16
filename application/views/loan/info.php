@@ -12,7 +12,6 @@
 					<li class="submenu"><a href="<?php echo base_url(); ?>borrower/add">Add Borrower</a></li>
 					<li class="submenu"><a href="<?php echo base_url(); ?>borrower/viewall">View Borrowers</a></li>
 					<li><a href="<?php echo base_url(); ?>stats/payments">Payments</a></li>
-					<li><a href="<?php echo base_url(); ?>stats/transactions">Transactions</a></li>
 				</ul>
 	        </div>
 	        <div class="rightcontentBody">
@@ -94,7 +93,7 @@
 		        		<table class="tablesorter">
 			        		<thead>
 			        			<tr>
-			        				<th>Trans #</th>
+			        				<th>Payment #</th>
 			        				<th>Trans Date</th>
 			        				<th>User</th>
 			        				<th>Description</th>
@@ -105,7 +104,7 @@
 			        			<?php $trans = $this->Loan_model->view_transactions($_GET['id']);?>
 			        			<?php foreach ($trans->result() as $transact) :?>
 			        			<tr>
-			        				<td><?php echo $transact->transaction_id; ?></td>
+			        				<td><?php echo $transact->payment_number; ?></td>
 			        				<td><?php echo $transact->transaction_date; ?></td>
 			        				<td><?php echo $transact->username; ?></td>
 			        				<td><?php echo 'Description'; ?></td>

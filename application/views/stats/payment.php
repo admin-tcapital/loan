@@ -1,22 +1,37 @@
 		<div class="clearFix"></div>
 		<div class="contentBody">
-			<div class="contentTitle">Main Page</div>
+			<div class="contentTitle">Payments</div>
 			<div class="clearFix"></div>
 			<div class="leftcontentBody">
 				<ul>
 					<li><a href="<?php echo base_url(); ?>loan/view/">Loan</a></li>
 					<li><a href="<?php echo base_url(); ?>borrower/">Borrower</a></li>
 					<li><a href="<?php echo base_url(); ?>stats/payments">Payments</a></li>
-					<li><a href="<?php echo base_url(); ?>stats/transactions">Transactions</a></li>
+					<li class="submenu"><a href="<?php echo base_url(); ?>stats/payments/received">Received</a></li>
+					<li class="submenu"><a href="<?php echo base_url(); ?>stats/payments/incoming">Incoming</a></li>
 				</ul>
 	        </div>
 	        <div class="rightcontentBody">
 	        	<div class="frm_container">
-	        		<div class="frm_heading"><span>Past Due Payments</span></div>
+	        		<?php 
+	        			
+        				$action = $this->uri->segment(3);
+						
+						switch ($action) {
+							case 'incoming':
+								$payments = $this->Payment_model->get_incoming_payments();
+								$payment_type = 'Incoming';
+								break;
+							default:
+								$payments = $this->Payment_model->get_received_payments();
+								$payment_type = 'Received';
+								break;
+						}
+        			?>
+	        		<div class="frm_heading"><span><?php echo $payment_type;?> Payments</span></div>
 	        		<div class="frm_inputs">
-	        			<?php $due = $this->Loan_model->get_due_payments();?>
-	        			<?php if($due) : ?>
-		        		<table class="tablesorter">
+			        	<?php if($payments AND $payment_type == 'Incoming') : ?>
+			        	<table class="tablesorter">
 			        		<thead>
 			        			<tr>
 			        				<th>Loan #</th>
@@ -27,86 +42,47 @@
 			        			</tr>
 			        		</thead>
 			        		<tbody>
-			        			<?php foreach ($due->result() as $due_payment) :?>
+			        			<?php foreach ($payments->result() as $payment) :?>
 			        			<tr>
-			        				<td><a href="<?php echo base_url();?>loan/view_info/?id=<?php echo $due_payment->borrower_loan_id ;?>"><?php echo $due_payment->borrower_loan_id ;?></a></td>
-			        				<td><?php echo $due_payment->payment_sched ;?></td>
-			        				<td><?php echo $due_payment->amount ;?></td>
-			        				<td><a href="<?php echo base_url();?>borrower/view/?id=<?php echo $due_payment->borrower_id ;?>"><?php echo $due_payment->lname.', '.$due_payment->fname ;?></a></td>
-			        				<td><?php echo $due_payment->payment_number ;?></td>
+			        				<td><a href="<?php echo base_url();?>loan/view_info/?id=<?php echo $payment->borrower_loan_id ;?>"><?php echo $payment->borrower_loan_id ;?></a></td>
+			        				<td><?php echo $payment->payment_sched ;?></td>
+			        				<td><?php echo $payment->amount ;?></td>
+			        				<td><a href="<?php echo base_url();?>borrower/view/?id=<?php echo $payment->borrower_id ;?>"><?php echo $payment->lname.', '.$payment->fname ;?></a></td>
+			        				<td><?php echo $payment->payment_number ;?></td>
 			        			</tr>
 			        			<?php endforeach; ?>
 			        		</tbody>
 			        	</table>
-			        	<?php else : ?>
-			        	No past due payments.
-			        	<?php endif; ?>
-	        		</div>
-        		</div>
-        		<div class="frm_container">
-	        		<div class="frm_heading"><span>Due Payments Today</span></div>
-	        		<div class="frm_inputs">
-	        			<?php $due = $this->Loan_model->get_due_payments_now();?>
-	        			<?php if($due) : ?>
-		        		<table class="tablesorter">
+			        	<?php elseif($payments AND $payment_type == 'Received') : ?>
+			        	<table class="tablesorter">
 			        		<thead>
 			        			<tr>
 			        				<th>Loan #</th>
-			        				<th>Check Date</th>
-			        				<th>Amount Due</th>
-			        				<th>Name</th>
+			        				<th>Process Date</th>
+			        				<th>Amount Received</th>
+			        				<th>Customer Name</th>
+			        				<th>Processed By</th>
 			        				<th>Payment #</th>
 			        			</tr>
 			        		</thead>
 			        		<tbody>
-			        			<?php foreach ($due->result() as $due_payment) :?>
+			        			<?php foreach ($payments->result() as $payment) :?>
 			        			<tr>
-			        				<td><a href="<?php echo base_url();?>loan/view_info/?id=<?php echo $due_payment->borrower_loan_id ;?>"><?php echo $due_payment->borrower_loan_id ;?></a></td>
-			        				<td><?php echo $due_payment->payment_sched ;?></td>
-			        				<td><?php echo $due_payment->amount ;?></td>
-			        				<td><a href="<?php echo base_url();?>borrower/view/?id=<?php echo $due_payment->borrower_id ;?>"><?php echo $due_payment->lname.', '.$due_payment->fname ;?></a></td>
-			        				<td><?php echo $due_payment->payment_number ;?></td>
+			        				<td><a href="<?php echo base_url();?>loan/view_info/?id=<?php echo $payment->borrower_loan_id ;?>"><?php echo $payment->borrower_loan_id ;?></a></td>
+			        				<td><?php echo $payment->process_date ;?></td>
+			        				<td><?php echo $payment->amount ;?></td>
+			        				<td><a href="<?php echo base_url();?>borrower/view/?id=<?php echo $payment->borrower_id ;?>"><?php echo $payment->lname.', '.$payment->fname ;?></a></td>
+			        				<td><?php echo $payment->username ;?></td>
+			        				<td><?php echo $payment->payment_number ;?></td>
 			        			</tr>
 			        			<?php endforeach; ?>
 			        		</tbody>
 			        	</table>
 			        	<?php else : ?>
-			        	No due payments today.
-			        	<?php endif; ?>
+					        No records found.
+					    <?php endif; ?>
 	        		</div>
-        		</div>
-        		<div class="frm_container">
-	        		<div class="frm_heading"><span>Due Payments This Week</span></div>
-	        		<div class="frm_inputs">
-	        			<?php $due = $this->Loan_model->get_due_payments_week();?>
-	        			<?php if($due) : ?>
-		        		<table class="tablesorter">
-			        		<thead>
-			        			<tr>
-			        				<th>Loan #</th>
-			        				<th>Check Date</th>
-			        				<th>Amount Due</th>
-			        				<th>Name</th>
-			        				<th>Payment #</th>
-			        			</tr>
-			        		</thead>
-			        		<tbody>
-			        			<?php foreach ($due->result() as $due_payment) :?>
-			        			<tr>
-			        				<td><a href="<?php echo base_url();?>loan/view_info/?id=<?php echo $due_payment->borrower_loan_id ;?>"><?php echo $due_payment->borrower_loan_id ;?></a></td>
-			        				<td><?php echo $due_payment->payment_sched ;?></td>
-			        				<td><?php echo $due_payment->amount ;?></td>
-			        				<td><a href="<?php echo base_url();?>borrower/view/?id=<?php echo $due_payment->borrower_id ;?>"><?php echo $due_payment->lname.', '.$due_payment->fname ;?></a></td>
-			        				<td><?php echo $due_payment->payment_number ;?></td>
-			        			</tr>
-			        			<?php endforeach; ?>
-			        		</tbody>
-			        	</table>
-			        	<?php else : ?>
-			        	No due payments this week.
-			        	<?php endif; ?>
-	        		</div>
-        		</div>
+	        	</div>
 	        </div>
 	        <div class="clearFix"></div>
 		</div>

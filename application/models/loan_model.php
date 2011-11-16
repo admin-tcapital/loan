@@ -210,6 +210,7 @@ class Loan_model extends CI_Model {
 		$this->db->join('lend_payments', 'lend_transactions.payment_id = lend_payments.id');
 		$this->db->join('lend_admin', 'lend_admin.id = lend_transactions.admin_id');
 		$this->db->where(array('lend_payments.borrower_loan_id' => $loan_id));
+		$this->db->order_by('lend_transactions.rdate');
 		
 		return $this->db->get();
 	}

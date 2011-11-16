@@ -7,7 +7,6 @@
 					<li><a href="<?php echo base_url(); ?>loan/view/">Loan</a></li>
 					<li><a href="<?php echo base_url(); ?>borrower/">Borrower</a></li>
 					<li><a href="<?php echo base_url(); ?>stats/payments">Payments</a></li>
-					<li><a href="<?php echo base_url(); ?>stats/transactions">Transactions</a></li>
 				</ul>
 	        </div>
 	        <div class="rightcontentBody">

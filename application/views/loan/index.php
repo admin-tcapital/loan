@@ -9,7 +9,6 @@
 					<li class="submenu"><a href="<?php echo base_url(); ?>loan/calculator">Loan Calculator</a></li>
 					<li><a href="<?php echo base_url(); ?>borrower/">Borrower</a></li>
 					<li><a href="<?php echo base_url(); ?>stats/payments">Payments</a></li>
-					<li><a href="<?php echo base_url(); ?>stats/transactions">Transactions</a></li>
 				</ul>
 	        </div>
 	        <div class="rightcontentBody">
@@ -31,7 +30,7 @@
 	        				<td style="font-size: 12px; color: #191970; font-weight: 900;"><?php echo $loan->lname; ?></td>
 	        				<td><?php echo $loan->interest; ?>%</td>
 	        				<td><?php echo $loan->terms; ?></td>
-	        				<td>Every <?php echo $loan->frequency; ?> Days</td>
+	        				<td>Every <?php echo $loan->frequency; ?></td>
 	        				<td><a href="<?php echo base_url(); ?>loan/edit/?id=<?php echo $loan->id; ?>" style="margin-left: 12px;"><img src="<?php echo base_url(); ?>css/document_edit.png" /></a></td>
 	        				<td><a href="<?php echo base_url(); ?>loan/delete/<?php echo $loan->id; ?>" style="margin-left: 12px;"><img src="<?php echo base_url(); ?>css/document_delete.png" /></a></td>
 	        			</tr>
