@@ -47,7 +47,14 @@ class Payment_model extends CI_Model {
 		$this->db->update('lend_payments', array('status' => 'PAID'), array('id' => $payment_id));
 		
 		//if it was the last payment, CLOSED the loan
-		$this->db->update('lend_borrower_loans', array('status' => 'CLOSED'), array('id' => $info->borrower_loan_id));
+		$this->db->select('MAX(id) as last_payment');
+		$payment = $this->db->get_where('lend_payments', array('borrower_loan_id' => $info->borrower_loan_id));
+		$result = $payment->row();
+		
+		if($result->last_payment == $payment_id) {
+			$this->db->update('lend_borrower_loans', array('status' => 'CLOSED'), array('id' => $info->borrower_loan_id));
+		}
+		
 		
 		//insert transaction
 		$this->db->insert('lend_transactions', array('borrower_id' => $info->borrower_id, 'payment' => $info->amount, 'admin_id' => $this->session->userdata('lend_user_id'), 'payment_id' => $info->payment_id));
