@@ -143,6 +143,7 @@ class Borrower_model extends CI_Model {
 		date_default_timezone_set('Asia/Manila');
 		
 		$amount = $param['loan_amount'];
+		$loan_date = $param['loan_date'];
 		
 		//get loan parameters
 		$loan = $this->Loan_model->chk_loan_exist(array('id' => $param['loan_id']));
@@ -172,7 +173,7 @@ class Borrower_model extends CI_Model {
 		//payment per term
 		$amount_term = number_format(round($amount / $loan->terms, 2) + $amount_interest, 2, '.', '');
 		
-		$date = date('m/d/Y');
+		$date = $loan_date;
 		
 		//additional info to be insert
 		$add_info = array(

@@ -37,6 +37,7 @@ class Borrower extends CI_Controller {
 		$this->form_validation->set_rules('loan_amount', 'Amount', 'trim|required|xss_clean|numeric');
 		$this->form_validation->set_rules('loan_id', 'Loan Type', 'trim|required|xss_clean|numeric');
 		$this->form_validation->set_rules('borrower_id', 'Borrower', 'trim|required|xss_clean|numeric');
+		$this->form_validation->set_rules('loan_date', 'Loan Date', 'trim|required|xss_clean');
 		
 		if($this->form_validation->run() == FALSE)
 		{

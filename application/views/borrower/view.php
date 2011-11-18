@@ -173,6 +173,10 @@
 		        				<td><?php echo form_dropdown('loan_id', $loan_types); ?></td>
 		        			</tr>
 		        			<tr>
+	        				<td>Loan Start Date:</td>
+	        				<td><input type="text" name="loan_date" class="datepicker" value="<?php echo set_value('loan_date'); ?>" /></td>
+	        			</tr>
+		        			<tr>
 		        				<td></td>
 		        				<td><input type="submit" name="submit_borrower" value="Submit" /></td>
 		        			</tr>
