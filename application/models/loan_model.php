@@ -296,5 +296,26 @@ class Loan_model extends CI_Model {
 		}
 	}
 	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * View payments overview
+	 * 
+	 */
+	function payments_overview($loan_id)
+	{
+		$this->db->select('*');
+		$this->db->from('lend_payments');
+		$this->db->join('lend_borrower', 'lend_payments.borrower_id = lend_borrower.id');
+		$this->db->where(array('lend_payments.borrower_loan_id' => $loan_id));
+		$this->db->order_by('lend_payments.payment_sched');
+		$info = $this->db->get();
+
+		if ($info->num_rows() > 0) {
+			return $info;
+		} else {
+			return FALSE;
+		}
+	}
 	
 }

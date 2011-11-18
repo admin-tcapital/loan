@@ -55,7 +55,6 @@ class Payment_model extends CI_Model {
 			$this->db->update('lend_borrower_loans', array('status' => 'CLOSED'), array('id' => $info->borrower_loan_id));
 		}
 		
-		
 		//insert transaction
 		$this->db->insert('lend_transactions', array('borrower_id' => $info->borrower_id, 'payment' => $info->amount, 'admin_id' => $this->session->userdata('lend_user_id'), 'payment_id' => $info->payment_id));
 	}

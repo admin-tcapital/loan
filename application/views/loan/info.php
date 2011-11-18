@@ -88,6 +88,32 @@
 	        		</div>
         		</div>
         		<div class="frm_container">
+	        		<div class="frm_heading"><span>Overview</span></div>
+	        		<div class="frm_inputs">
+		        		<table class="tablesorter">
+			        		<thead>
+			        			<tr>
+			        				<th>Payment #</th>
+			        				<th>Check Date</th>
+			        				<th>Amount</th>
+			        				<th>Status</th>
+			        			</tr>
+			        		</thead>
+			        		<tbody>
+			        			<?php $payments = $this->Loan_model->payments_overview($_GET['id']);?>
+			        			<?php foreach ($payments->result() as $payment) :?>
+			        			<tr>
+			        				<td><?php echo $payment->payment_number ;?></td>
+			        				<td><?php echo $payment->payment_sched ;?></td>
+			        				<td><?php echo $payment->amount ;?></td>
+			        				<td><?php echo $payment->status ;?></td>
+			        			</tr>
+			        			<?php endforeach; ?>
+			        		</tbody>
+			        	</table>
+	        		</div>
+        		</div>
+        		<div class="frm_container">
 	        		<div class="frm_heading"><span>Transactions</span></div>
 	        		<div class="frm_inputs">
 		        		<table class="tablesorter">

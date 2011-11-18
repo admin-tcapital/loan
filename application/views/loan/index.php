@@ -5,7 +5,7 @@
 			<div class="leftcontentBody">
 				<ul>
 					<li><a href="<?php echo base_url(); ?>loan/view/">Loan</a></li>
-					<li class="submenu"><a href="<?php echo base_url(); ?>loan/add">Add New Loan</a></li>
+					<li class="submenu"><a href="<?php echo base_url(); ?>loan/add">New Loan Type</a></li>
 					<li class="submenu"><a href="<?php echo base_url(); ?>loan/calculator">Loan Calculator</a></li>
 					<li><a href="<?php echo base_url(); ?>borrower/">Borrower</a></li>
 					<li><a href="<?php echo base_url(); ?>stats/payments">Payments</a></li>
