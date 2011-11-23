@@ -42,12 +42,39 @@ class Loan_model extends CI_Model {
 		$this->db->from('lend_borrower_loans');
 		$this->db->join('lend_borrower_loan_settings', 'lend_borrower_loans.id = lend_borrower_loan_settings.borrower_loan_id');
 		$this->db->join('lend_borrower', 'lend_borrower.id = lend_borrower_loans.borrower_id');
-		$this->db->where($param);
+		
+		//if there's a filter specify, consider it
+		count($param) > 0 ? $this->db->where($param) : NULL;
 		
 		$exist = $this->db->get();
 		
 		if ($exist->num_rows() > 0) {
 			return $exist->row();
+		} else {
+			return FALSE;
+		}
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Get record from lend_borrower_loans table based on given parameters
+	 * @param array $param
+	 * @return boolean
+	 */
+	function get_borrower_loans($param = array()) {
+		$this->db->select('*, lend_borrower_loans.id as borrower_loan_id, lend_borrower_loan_settings.lname as loan_name');
+		$this->db->from('lend_borrower_loans');
+		$this->db->join('lend_borrower_loan_settings', 'lend_borrower_loans.id = lend_borrower_loan_settings.borrower_loan_id');
+		$this->db->join('lend_borrower', 'lend_borrower.id = lend_borrower_loans.borrower_id');
+		
+		//if there's a filter specify, consider it
+		count($param) > 0 ? $this->db->where($param) : NULL;
+		
+		$exist = $this->db->get();
+		
+		if ($exist->num_rows() > 0) {
+			return $exist;
 		} else {
 			return FALSE;
 		}
