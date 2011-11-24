@@ -60,14 +60,12 @@
 			<div class="clearFix"></div>
 			<div class="contentSearch">
 				<div id="search_label">SEARCH</div>
-				<form>
-					<table>
-						<tr>
-							<td>Loan #: <input type="text" name="loan_id" /><input type="submit" name="submit_search_loan" value="GO" /></td>
-							<td>Customer Name: <input type="text" name="customer_name" /><input type="submit" name="submit_search_name" value="GO" /></td>
-						</tr>
-					</table>
-				</form>
+				<table>
+					<tr>
+						<td><form action="<?php echo base_url(); ?>search/loan">Loan #: <input type="text" name="loan_id" value="<?php echo isset($_GET['loan_id']) ? $_GET['loan_id']: NULL; ?>" /><input type="submit" name="submit_search_loan" value="GO" /></form></td>
+						<td><form action="<?php echo base_url(); ?>search/loan">Customer Name: <input type="text" name="customer_name" value="<?php echo isset($_GET['customer_name']) ? $_GET['customer_name']: NULL; ?>"/><input type="submit" name="submit_search_name" value="GO" /></form></td>
+					</tr>
+				</table>
 			</div>
 			<?php endif; ?>
 		</div>

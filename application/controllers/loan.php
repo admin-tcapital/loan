@@ -143,4 +143,5 @@ class Loan extends CI_Controller {
 			}
 		}
 	}
+
 }
