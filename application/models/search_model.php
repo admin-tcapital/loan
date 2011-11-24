@@ -21,10 +21,10 @@ class Search_model extends CI_Model {
 	 * @return boolean
 	 */
 	function search($param = array()) {
-		$this->db->select('*, lend_borrower_loans.id as borrower_loan_id, lend_borrower_loan_settings.lname as loan_name');
+		$this->db->select('*, lend_borrower_loans.id as borrower_loan_id, lend_borrower_loan_settings.lname as loan_name, lend_borrower.id as fborrower_id');
 		$this->db->from('lend_borrower_loans');
 		$this->db->join('lend_borrower_loan_settings', 'lend_borrower_loans.id = lend_borrower_loan_settings.borrower_loan_id');
-		$this->db->join('lend_borrower', 'lend_borrower.id = lend_borrower_loans.borrower_id');
+		$this->db->join('lend_borrower', 'lend_borrower.id = lend_borrower_loans.borrower_id', 'RIGHT');
 		
 		//if there's a filter specify, consider it
 		count($param) > 0 ? $this->db->where($param) : NULL;

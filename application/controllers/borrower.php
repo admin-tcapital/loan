@@ -97,9 +97,10 @@ class Borrower extends CI_Controller {
 			if (isset($_POST['submit_borrower'])) {
 				//destroy submit_borrower from the POST array
 				unset($_POST['submit_borrower']);
-				//add loan
-				if ($this->Borrower_model->add($_POST)) {
-					redirect('borrower/view', 'refresh');
+				//add borrower
+				$insert_id = $this->Borrower_model->add($_POST);
+				if ($insert_id) {
+					redirect('borrower/view/?id='.$insert_id, 'refresh');
 				}
 			}
 		}

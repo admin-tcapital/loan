@@ -58,6 +58,13 @@
 			</div>
 			<?php if ($this->router->class != 'user') : ?>
 			<div class="clearFix"></div>
+			<div id="searchwrapper">
+				<form action="<?php echo base_url(); ?>search/loan">
+					<input type="text" class="searchbox" name="s" value="<?php echo isset($_GET['s']) ? $_GET['s']: NULL; ?>" />
+					<input type="submit" class="searchbox_submit" value="" />
+				</form>
+			</div>
+			<!-- old search box
 			<div class="contentSearch">
 				<div id="search_label">SEARCH</div>
 				<table>
@@ -67,6 +74,7 @@
 					</tr>
 				</table>
 			</div>
+			-->
 			<?php endif; ?>
 		</div>
 		

@@ -42,7 +42,7 @@ class Borrower_model extends CI_Model {
 		$insert = $this->db->insert('lend_borrower', $param);
 		
 		if ($insert) {
-			return TRUE;
+			return $this->db->insert_id();
 		} else {
 			return FALSE;
 		}
