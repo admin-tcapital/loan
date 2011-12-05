@@ -158,7 +158,6 @@
 				});
 			</script>
 			<div style='display:none'>
-				
 				<div class="frm_container" id="dialog-modal">
 	        		<div class="frm_heading"><span>Add Loan for <?php echo $data->fname.' '.$data->lname; ?></span></div>
 	        		<div class="frm_inputs">
@@ -173,9 +172,9 @@
 		        				<td><?php echo form_dropdown('loan_id', $loan_types); ?></td>
 		        			</tr>
 		        			<tr>
-	        				<td>Loan Start Date:</td>
-	        				<td><input type="text" name="loan_date" class="datepicker" value="<?php echo set_value('loan_date'); ?>" /></td>
-	        			</tr>
+		        				<td>Loan Start Date:</td>
+		        				<td><input type="text" name="loan_date" class="datepicker" value="<?php echo set_value('loan_date'); ?>" /></td>
+		        			</tr>
 		        			<tr>
 		        				<td></td>
 		        				<td><input type="submit" name="submit_borrower" value="Submit" /></td>
@@ -185,6 +184,4 @@
 		        		</form>  
 	        		</div>
         		</div>   
-        		
-        		  	
 			</div>

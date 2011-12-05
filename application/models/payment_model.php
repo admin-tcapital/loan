@@ -44,7 +44,7 @@ class Payment_model extends CI_Model {
 		$info = $this->get_info($payment_id);
 		
 		//update payment status to PAID
-		$this->db->update('lend_payments', array('status' => 'PAID'), array('id' => $payment_id));
+		$uStatus = $this->db->update('lend_payments', array('status' => 'PAID'), array('id' => $payment_id));
 		
 		//if it was the last payment, CLOSED the loan
 		$this->db->select('MAX(id) as last_payment');
@@ -56,7 +56,15 @@ class Payment_model extends CI_Model {
 		}
 		
 		//insert transaction
-		$this->db->insert('lend_transactions', array('borrower_id' => $info->borrower_id, 'payment' => $info->amount, 'admin_id' => $this->session->userdata('lend_user_id'), 'payment_id' => $info->payment_id));
+		$uTransact = $this->db->insert('lend_transactions', array('borrower_id' => $info->borrower_id, 'payment' => $info->amount, 'admin_id' => $this->session->userdata('lend_user_id'), 'payment_id' => $info->payment_id));
+		
+		//if all were successfull, return TRUE 
+		if ($uStatus AND $uTransact) {
+			return TRUE;
+		}
+		
+		//if something went wrong return FALSE
+		return FALSE;
 	}
 
 	// --------------------------------------------------------------------

@@ -7,6 +7,8 @@ class Loan extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('Loan_model');
+		
+		$this->load->model('Payment_model');
 	}
 	
 	function view()

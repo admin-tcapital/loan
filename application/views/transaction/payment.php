@@ -14,7 +14,7 @@
 	        </div>
 	        <div class="rightcontentBody">
 	        	<?php 
-					$payment = $this->Payment_model->get_info($_GET['id']);
+					$payment = $this->Payment_model->get_info($payment->id);
 				?>
 				<?php if($payment) : ?>
 	        	<form action="" method="post">

@@ -28,8 +28,13 @@ class Transaction extends CI_Controller {
 		);
 	}
 	
-	function paid($payment_id)
+	function paid($payment_id, $loan_id)
 	{
 		$transac = $this->Payment_model->paid($payment_id);
+		
+		if ($transac) {
+			redirect('loan/view_info/?id='.$loan_id, 'refresh');
+			
+		}
 	}
 }

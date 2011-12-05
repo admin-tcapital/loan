@@ -57,7 +57,10 @@
 					$payment = $this->Loan_model->next_payment($loan->borrower_loan_id);
 				?>
 				<?php if ($payment) : ?>
-				<div class="manage_menu"><a href="<?php echo base_url();?>transaction/payment/?id=<?php echo $payment->id; ?>" class="button_cart">Payment</a></div>
+				<div class="manage_menu">
+					<!-- <a href="<?php echo base_url();?>transaction/payment/?id=<?php echo $payment->id; ?>" class="button_cart">Payment</a> -->
+					<span class="button_cart">Payment</span>
+				</div>
 				<?php endif; ?>
 				<div class="clearFix"></div>
         		<div class="frm_container">
@@ -82,6 +85,52 @@
 		        				<td><?php echo $payment->status; ?></td>
 		        			</tr>
 		        		</table>
+		        		<!-- Dialog Box -->
+						<?php 
+							$ipayment = $this->Payment_model->get_info($payment->id);
+						?>
+						<script type="text/javascript">
+							$(function() {
+								$(".button_cart").colorbox({width:"50%", inline:true, href:"#dialog-modal"});
+							});
+						</script>
+						<div style='display:none'>
+							<div class="frm_container" id="dialog-modal">
+				        		<div class="frm_heading"><span>Payment Confirmation</span></div>
+				        		<div class="frm_inputs">
+				        			<form action="<?php echo base_url(); ?>transaction/paid/<?php echo $payment->id.'/'.$_GET['id']; ?>" method="post">
+					        		<table class="info_view">
+					        			<tr>
+					        				<td>Payment #:</td>
+					        				<td><?php echo $ipayment->payment_number; ?></td>
+					        			</tr>
+					        			<tr>
+					        				<td>Borrower:</td>
+					        				<td><?php echo $ipayment->lname.', '.$ipayment->fname; ?></td>
+					        			</tr>
+					        			<tr>
+					        				<td>Amount:</td>
+					        				<td><?php echo $ipayment->amount; ?></td>
+					        			</tr>
+					        			<tr>
+					        				<td>Due Date:</td>
+					        				<td><?php echo $ipayment->payment_sched; ?></td>
+					        			</tr>
+					        			<tr>
+					        				<td>Status:</td>
+					        				<td><?php echo $ipayment->status; ?></td>
+					        			</tr>
+					        			<tr>
+					        				<td></td>
+					        				<td><input type="submit" name="submit_payment" value="Paid" /></td>
+					        			</tr>
+					        		</table>
+					        		<input type="hidden" name="borrower_id" value="<?php echo $_GET['id']; ?>" />
+					        		</form>  
+				        		</div>
+			        		</div>   
+						</div>
+						<!-- End Dialog Box -->
 		        		<?php else : ?>
 		        		No scheduled payment.
 		        		<?php endif; ?>
