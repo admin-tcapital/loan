@@ -15,7 +15,7 @@
     					if (is_numeric($_GET['s'])) {
 							$loans = $this->Search_model->search(array('lend_borrower_loans.id' => $_GET['s']));
     					} else {
-	    					$loans = $this->Search_model->search("concat(lend_borrower.fname,' ',lend_borrower.lname) LIKE '%".$_GET['s']."%'");
+	    					$loans = $this->Search_model->search("concat(lend_borrower.fname,' ',lend_borrower.lname) LIKE \"%".$_GET['s']."%\"");
     					}
     				}
 				?>
