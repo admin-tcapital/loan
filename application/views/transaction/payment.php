@@ -4,7 +4,7 @@
 			<div class="clearFix"></div>
 			<div class="leftcontentBody">
 				<ul>
-					<li><a href="<?php echo base_url(); ?>loan/view/">Loan</a></li>
+					<li><a href="<?php echo base_url(); ?>stats">Home</a></li><li><a href="<?php echo base_url(); ?>loan/view/">Loan</a></li>
 					<li><a href="<?php echo base_url(); ?>borrower/">Borrower</a></li>
 					<li class="submenu"><a href="<?php echo base_url(); ?>borrower/add">Add Borrower</a></li>
 					<li class="submenu"><a href="<?php echo base_url(); ?>borrower/viewall">View Borrowers</a></li>
