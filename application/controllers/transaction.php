@@ -23,7 +23,7 @@ class Transaction extends CI_Controller {
 				'menu' => array(
 					'Logout' => 'user/logout', 
 					'Loan' => 'loan/view', 
-					'Home' => 'stats')
+					'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats')
 			)
 		);
 	}

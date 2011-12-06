@@ -22,11 +22,11 @@ class Borrower extends CI_Controller {
 			'template/main', 
 			array(
 				'content'=>'borrower/index', 
-				'location' => 'Borrower / View', 
+				'location' => 'Borrower / View all', 
 				'menu' => array(
-					'Logout' => 'user/logout', 
-					'Loan' => 'loan/view', 
-					'Home' => 'stats')
+					'Logout' => 'user/logout',
+					'Loan' => 'loan/view',
+					'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats')
 			)
 		);
 	}
@@ -47,11 +47,11 @@ class Borrower extends CI_Controller {
 				'template/main', 
 				array(
 					'content'=>'borrower/view', 
-					'location' => 'Borrower / View', 
+					'location' => 'Borrower / View info', 
 					'menu' => array(
 						'Logout' => 'user/logout', 
 						'Loan' => 'loan/view', 
-						'Home' => 'stats')
+						'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats')
 				)
 			);
 		}
@@ -90,7 +90,7 @@ class Borrower extends CI_Controller {
 		{
 			//change validation error delimiters
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-			$this->load->view('template/main', array('content' => 'borrower/add', 'location' => 'Borrower / Add', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Home' => 'stats')));
+			$this->load->view('template/main', array('content' => 'borrower/add', 'location' => 'Borrower / Add new', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats')));
 		}
 		else
 		{
@@ -127,7 +127,7 @@ class Borrower extends CI_Controller {
 		{
 			//change validation error delimiters
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-			$this->load->view('template/main', array('content' => 'borrower/edit', 'location' => 'Borrower / Add', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Home' => 'stats')));
+			$this->load->view('template/main', array('content' => 'borrower/edit', 'location' => 'Borrower / Edit', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats')));
 		}
 		else
 		{
@@ -155,7 +155,7 @@ class Borrower extends CI_Controller {
 		{
 			//change validation error delimiters
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-			$this->load->view('template/main', array('content' => 'loan/calculator', 'location' => 'Loan / Loan Calculator', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Home' => 'stats')));
+			$this->load->view('template/main', array('content' => 'loan/calculator', 'location' => 'Loan / Loan Calculator', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats')));
 		}
 		else
 		{
@@ -166,9 +166,9 @@ class Borrower extends CI_Controller {
 				
 				if ($exist) {
 					$result = $this->Loan_model->calculate($this->input->post('amount'), $this->input->post('loan_type'), $this->input->post('loan_date'));
-					$this->load->view('template/main', array('content' => 'loan/calculator', 'data' => array('result' => $result), 'location' => 'Loan / Loan Calculator', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Home' => 'stats')));
+					$this->load->view('template/main', array('content' => 'loan/calculator', 'data' => array('result' => $result), 'location' => 'Loan / Loan Calculator', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats')));
 				} else {
-					$this->load->view('template/main', array('content' => 'loan/calculator', 'data' => array('error' => '<div class="error">Sorry, loan don\'t exist.</div>'), 'location' => 'Login', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Home' => 'stats')));
+					$this->load->view('template/main', array('content' => 'loan/calculator', 'data' => array('error' => '<div class="error">Sorry, loan don\'t exist.</div>'), 'location' => 'Login', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats')));
 				}
 			}
 		}

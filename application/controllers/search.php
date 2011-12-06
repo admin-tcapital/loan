@@ -15,11 +15,11 @@ class Search extends CI_Controller {
 			'template/main',
 			array(
 				'content'=>'search/index', 
-				'location' => 'Search', 
+				'location' => 'Search / Result', 
 				'menu' => array(
 					'Logout' => 'user/logout', 
 					'Loan' => 'loan/view', 
-					'Home' => 'stats')
+					'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats')
 				)
 			);
 	}
