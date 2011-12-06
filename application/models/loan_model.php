@@ -254,11 +254,12 @@ class Loan_model extends CI_Model {
 			SELECT c.fname, c.lname, c.id as \'borrower_id\', a.id as \'borrower_loan_id\', b.amount, b.payment_number, b.payment_sched 
 			FROM lend_borrower_loans a 
 			INNER JOIN lend_payments b
-			  ON a.next_payment_id = b.id
+			  ON a.id = b.borrower_loan_id
 			INNER JOIN lend_borrower c
 			  ON a.borrower_id = c.id
 			WHERE b.payment_sched < DATE(NOW())
 			  AND a.status = \'ACTIVE\'
+			  AND b.status = \'UNPAID\'
 			'
 		);
 		
@@ -281,11 +282,12 @@ class Loan_model extends CI_Model {
 			SELECT c.fname, c.lname, c.id as \'borrower_id\', a.id as \'borrower_loan_id\', b.amount, b.payment_number, b.payment_sched 
 			FROM lend_borrower_loans a 
 			INNER JOIN lend_payments b
-			  ON a.next_payment_id = b.id
+			  ON a.id = b.borrower_loan_id
 			INNER JOIN lend_borrower c
 			  ON a.borrower_id = c.id
 			WHERE b.payment_sched = DATE(NOW())
 			  AND a.status = \'ACTIVE\'
+			  AND b.status = \'UNPAID\'
 			'
 		);
 		
@@ -308,11 +310,12 @@ class Loan_model extends CI_Model {
 			SELECT c.fname, c.lname, c.id as \'borrower_id\', a.id as \'borrower_loan_id\', b.amount, b.payment_number, b.payment_sched 
 			FROM lend_borrower_loans a 
 			INNER JOIN lend_payments b
-			  ON a.next_payment_id = b.id
+			  ON a.id = b.borrower_loan_id
 			INNER JOIN lend_borrower c
 			  ON a.borrower_id = c.id
 			WHERE WEEK(b.payment_sched) + YEAR(b.payment_sched) = WEEK(NOW()) + YEAR(NOW())
 			  AND a.status = \'ACTIVE\'
+			  AND b.status = \'UNPAID\'
 			'
 		);
 		

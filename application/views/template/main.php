@@ -33,7 +33,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$( '.tablesorter' ).tablesorter(); //make table sortable
-		$( '.datepicker' ).datepicker(); //make datepicker
+		$( '.datepicker' ).datepicker({ dateFormat: 'yy-mm-dd' }); //make datepicker
 		$( '.button' ).button(); //make datepicker
 		$( '.button_edit' ).button({ icons: {primary:'ui-icon-pencil'} });
 		$( '.button_add' ).button({ icons: {primary:'ui-icon-plus'} });
