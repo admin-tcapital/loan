@@ -26,6 +26,7 @@
 	        			<?php 
 							$loans = $this->Loan_model->get_borrower_loans();
 						?>
+						<?php if ($loans) : ?>
 	        			<?php foreach ($loans->result() as $loan) :?>
 	        			<tr>
 	        				<td><a href="<?php echo base_url(); ?>loan/view_info/?id=<?php echo $loan->borrower_loan_id;?>"><?php echo $loan->borrower_loan_id; ?></a></td>
@@ -35,6 +36,7 @@
 	        				<td>&#8369;<?php echo number_format($loan->loan_amount_total, 2, '.', ','); ?></td>
 	        			</tr>
 	        			<?php endforeach; ?>
+	        			<?php endif; ?>
 	        		</tbody>
 	        	</table>
 	        </div>

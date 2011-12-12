@@ -365,7 +365,7 @@ $config['proxy_ips'] = '';
 |Turn debugging on or off
 |
 */
-$config['enable_profiling'] = TRUE;
+$config['enable_profiling'] = FALSE;
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

@@ -70,6 +70,6 @@
 						 </font>    
 					</td>
 				</tr>
-			</tabe>
+			</table>
 			</div>
 		</div>
