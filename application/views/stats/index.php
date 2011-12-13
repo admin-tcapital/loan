@@ -15,7 +15,7 @@
 	        		<div class="frm_inputs">
 	        			<?php $due = $this->Loan_model->get_due_payments();?>
 	        			<?php if($due) : ?>
-		        		<table class="tablesorter">
+		        		<table class="tablesorter" cellspacing="1">
 			        		<thead>
 			        			<tr>
 			        				<th>Loan #</th>
@@ -37,6 +37,23 @@
 			        			<?php endforeach; ?>
 			        		</tbody>
 			        	</table>
+			        	<div class="pager">
+			        		<ul>
+			        			<li><span class="first ui-icon ui-icon-seek-first"></span></li>
+			        			<li><span class="prev first ui-icon ui-icon-seek-prev"></span></li>
+			        			<li><input class="pagedisplay" type="text"></li>
+			        			<li><span class="next first ui-icon ui-icon-seek-next"></span></li>
+			        			<li><span class="last ui-icon ui-icon-seek-end"></span></li>
+			        			<li>
+			        				<select class="pagesize">
+										
+										<option value="20" selected="selected">20</option>
+										<option value="30">30</option>
+										<option value="40">40</option>
+									</select>
+			        			</li>
+			        		</ul>
+						</div>
 			        	<?php else : ?>
 			        	No past due payments.
 			        	<?php endif; ?>
@@ -47,7 +64,7 @@
 	        		<div class="frm_inputs">
 	        			<?php $due = $this->Loan_model->get_due_payments_now();?>
 	        			<?php if($due) : ?>
-		        		<table class="tablesorter">
+		        		<table class="tablesorter" cellspacing="1">
 			        		<thead>
 			        			<tr>
 			        				<th>Loan #</th>
@@ -69,6 +86,23 @@
 			        			<?php endforeach; ?>
 			        		</tbody>
 			        	</table>
+			        	<div class="pager">
+			        		<ul>
+			        			<li><span class="first ui-icon ui-icon-seek-first"></span></li>
+			        			<li><span class="prev first ui-icon ui-icon-seek-prev"></span></li>
+			        			<li><input class="pagedisplay" type="text"></li>
+			        			<li><span class="next first ui-icon ui-icon-seek-next"></span></li>
+			        			<li><span class="last ui-icon ui-icon-seek-end"></span></li>
+			        			<li>
+			        				<select class="pagesize">
+										
+										<option value="20" selected="selected">20</option>
+										<option value="30">30</option>
+										<option value="40">40</option>
+									</select>
+			        			</li>
+			        		</ul>
+						</div>
 			        	<?php else : ?>
 			        	No due payments today.
 			        	<?php endif; ?>
@@ -79,7 +113,7 @@
 	        		<div class="frm_inputs">
 	        			<?php $due = $this->Loan_model->get_due_payments_week();?>
 	        			<?php if($due) : ?>
-		        		<table class="tablesorter">
+		        		<table class="tablesorter" cellspacing="1">
 			        		<thead>
 			        			<tr>
 			        				<th>Loan #</th>
@@ -101,6 +135,23 @@
 			        			<?php endforeach; ?>
 			        		</tbody>
 			        	</table>
+			        	<div class="pager">
+			        		<ul>
+			        			<li><span class="first ui-icon ui-icon-seek-first"></span></li>
+			        			<li><span class="prev first ui-icon ui-icon-seek-prev"></span></li>
+			        			<li><input class="pagedisplay" type="text"></li>
+			        			<li><span class="next first ui-icon ui-icon-seek-next"></span></li>
+			        			<li><span class="last ui-icon ui-icon-seek-end"></span></li>
+			        			<li>
+			        				<select class="pagesize">
+										
+										<option value="20" selected="selected">20</option>
+										<option value="30">30</option>
+										<option value="40">40</option>
+									</select>
+			        			</li>
+			        		</ul>
+						</div>
 			        	<?php else : ?>
 			        	No due payments this week.
 			        	<?php endif; ?>
