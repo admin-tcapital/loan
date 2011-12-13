@@ -89,9 +89,6 @@
 						<?php 
 							$ipayment = $this->Payment_model->get_info($payment->id);
 						?>
-						<script type="text/javascript">
-							
-						</script>
 						<div style='display:none'>
 							<div class="frm_container" id="dialog-modal">
 				        		<div class="frm_heading"><span>Payment Confirmation</span></div>
@@ -153,7 +150,7 @@
 			        				<td><?php echo $payment->payment_number ;?></td>
 			        				<td><?php echo $payment->payment_sched ;?></td>
 			        				<td><?php echo $payment->amount ;?></td>
-			        				<td><?php echo $payment->status ;?></td>
+			        				<td><span style="color:<?php echo $payment->status=='PAID' ? 'GREEN' : 'RED'?>"><?php echo $payment->status; ?></span></td>
 			        			</tr>
 			        			<?php endforeach; ?>
 			        		</tbody>
