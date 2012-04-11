@@ -365,7 +365,17 @@ $config['proxy_ips'] = '';
 |Turn debugging on or off
 |
 */
-$config['enable_profiling'] = FALSE;
+$config['enable_profiling'] = TRUE;
+
+/*
+|--------------------------------------------------------------------------
+| Currency
+|--------------------------------------------------------------------------
+| Determine what currency the system is using
+|
+*/
+$config['currency_name'] = 'Peso';
+$config['currency_symbol'] = '&#8369;';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

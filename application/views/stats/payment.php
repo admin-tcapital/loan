@@ -46,7 +46,7 @@
 			        			<tr>
 			        				<td><a href="<?php echo base_url();?>loan/view_info/?id=<?php echo $payment->borrower_loan_id ;?>"><?php echo $payment->borrower_loan_id ;?></a></td>
 			        				<td><?php echo $payment->payment_sched ;?></td>
-			        				<td><?php echo $payment->amount ;?></td>
+			        				<td><?php echo $this->config->item('currency_symbol') . $payment->amount ;?></td>
 			        				<td><a href="<?php echo base_url();?>borrower/view/?id=<?php echo $payment->borrower_id ;?>"><?php echo $payment->lname.', '.$payment->fname ;?></a></td>
 			        				<td><?php echo $payment->payment_number ;?></td>
 			        			</tr>
@@ -87,7 +87,7 @@
 			        			<tr>
 			        				<td><a href="<?php echo base_url();?>loan/view_info/?id=<?php echo $payment->borrower_loan_id ;?>"><?php echo $payment->borrower_loan_id ;?></a></td>
 			        				<td><?php echo $payment->process_date ;?></td>
-			        				<td><?php echo $payment->amount ;?></td>
+			        				<td><?php echo $this->config->item('currency_symbol') . $payment->amount ;?></td>
 			        				<td><a href="<?php echo base_url();?>borrower/view/?id=<?php echo $payment->borrower_id ;?>"><?php echo $payment->lname.', '.$payment->fname ;?></a></td>
 			        				<td><?php echo $payment->username ;?></td>
 			        				<td><?php echo $payment->payment_number ;?></td>

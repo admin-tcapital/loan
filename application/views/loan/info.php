@@ -37,18 +37,18 @@
 		        			</tr>
 		        			<tr>
 		        				<td>Total Loan Amount:</td>
-		        				<td>&#8369;<?php echo number_format($loan->loan_amount_total, 2, '.', ','); ?></td>
+		        				<td><?php echo $this->config->item('currency_symbol') . number_format($loan->loan_amount_total, 2, '.', ','); ?></td>
 		        			</tr>
 		        			<tr>
 		        				<td>Payments Made:</td>
-		        				<td>&#8369;<?php $payments = $this->Loan_model->payments_made($loan->borrower_loan_id); 
-		        						echo !$payments ? 0: number_format($payments, 2, '.', ',');
+		        				<td><?php $payments = $this->Loan_model->payments_made($loan->borrower_loan_id); 
+		        						echo !$payments ? $this->config->item('currency_symbol') . 0: $this->config->item('currency_symbol') . number_format($payments, 2, '.', ',');
 		        					?>
 		        				</td>
 		        			</tr>
 		        			<tr>
 		        				<td>Remaining Balance:</td>
-		        				<td>&#8369;<?php echo number_format($loan->loan_amount_total - $payments, 2, '.', ','); ?></td>
+		        				<td><?php echo $this->config->item('currency_symbol') . number_format($loan->loan_amount_total - $payments, 2, '.', ','); ?></td>
 		        			</tr>
 		        		</table>
 	        		</div>
@@ -74,7 +74,7 @@
 		        			</tr>
 		        			<tr>
 		        				<td>Amount:</td>
-		        				<td><?php echo $payment->amount; ?></td>
+		        				<td><?php echo $this->config->item('currency_symbol') . $payment->amount; ?></td>
 		        			</tr>
 		        			<tr>
 		        				<td>Due Date:</td>
@@ -105,7 +105,7 @@
 					        			</tr>
 					        			<tr>
 					        				<td>Amount:</td>
-					        				<td><?php echo $ipayment->amount; ?></td>
+					        				<td><?php echo $this->config->item('currency_symbol') . $ipayment->amount; ?></td>
 					        			</tr>
 					        			<tr>
 					        				<td>Due Date:</td>
@@ -149,7 +149,7 @@
 			        			<tr>
 			        				<td><?php echo $payment->payment_number ;?></td>
 			        				<td><?php echo $payment->payment_sched ;?></td>
-			        				<td><?php echo $payment->amount ;?></td>
+			        				<td><?php echo $this->config->item('currency_symbol') . $payment->amount ;?></td>
 			        				<td><span style="color:<?php echo $payment->status=='PAID' ? 'GREEN' : 'RED'?>"><?php echo $payment->status; ?></span></td>
 			        			</tr>
 			        			<?php endforeach; ?>
@@ -196,7 +196,7 @@
 			        				<td><?php echo $transact->transaction_date; ?></td>
 			        				<td><?php echo $transact->username; ?></td>
 			        				<td><?php echo 'Description'; ?></td>
-			        				<td><?php echo $transact->amount; ?></td>
+			        				<td><?php echo $this->config->item('currency_symbol') . $transact->amount; ?></td>
 			        			</tr>
 			        			<?php endforeach; ?>
 			        		</tbody>

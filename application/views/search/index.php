@@ -42,7 +42,7 @@
 			        				<td><?php echo $loan->loan_name; ?></td>
 			        				<td><?php echo $loan->status; ?></td>
 			        				<td><a href="<?php echo base_url(); ?>borrower/view/?id=<?php echo $loan->fborrower_id;?>"><?php echo $loan->lname.', '.$loan->fname; ?></a></td>
-			        				<td>&#8369;<?php echo number_format($loan->loan_amount_total, 2, '.', ','); ?></td>
+			        				<td><?php echo $this->config->item('currency_symbol') . number_format($loan->loan_amount_total, 2, '.', ','); ?></td>
 			        			</tr>
 			        			<?php endforeach; ?>
 			        		</tbody>

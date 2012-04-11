@@ -88,13 +88,13 @@ class Borrower_model extends CI_Model {
 		$table = $table . '</table>';
 		$table = $table . '<h3>Computation</h3>';
 		$table = $table . '<table>';
-		$table = $table . '<tr><td>Loan Amount:</td><td> &#8369;'.number_format($amount, 2, '.', ',').'</td></tr>';
-		$table = $table . '<tr><td>Interest:</td><td> &#8369;'.$amount_interest.'</td></tr>';
-		$table = $table . '<tr><td>Amount Per Term:</td><td> &#8369;'.$amount_term.'</td></tr>';
-		$table = $table . '<tr><td>Total Payment:</td><td> &#8369;'.number_format($amount_total, 2, '.', ',').'</td></tr>';
+		$table = $table . '<tr><td>Loan Amount:</td><td> '.$this->config->item('currency_symbol') . number_format($amount, 2, '.', ',').'</td></tr>';
+		$table = $table . '<tr><td>Interest:</td><td> '.$this->config->item('currency_symbol') . $amount_interest.'</td></tr>';
+		$table = $table . '<tr><td>Amount Per Term:</td><td> '.$this->config->item('currency_symbol') . $amount_term.'</td></tr>';
+		$table = $table . '<tr><td>Total Payment:</td><td> '.$this->config->item('currency_symbol') . number_format($amount_total, 2, '.', ',').'</td></tr>';
 		$table = $table . '</table>';
 		$table = $table . '<table border="1" cellpadding="5" cellspacing="0">';
-		$table = $table . '<tr><td>Payment #</td><td>Amount (&#8369;)</td><td>Payment Date</td></tr>';
+		$table = $table . '<tr><td>Payment #</td><td>Amount ('.$this->config->item('currency_symbol').')</td><td>Payment Date</td></tr>';
 		for ($i = 1; $i <= $loan->terms; $i++)
 		{
 			$frequency = $loan->frequency * $i;

@@ -86,7 +86,7 @@
 		        			</tr>
 		        			<tr>
 		        				<td>Monthly Income:</td>
-		        				<td><?php echo $data->income; ?></td>
+		        				<td><?php echo $this->config->item('currency_symbol') . $data->income; ?></td>
 		        			</tr>
 		        		</table>
 	        		</div>
