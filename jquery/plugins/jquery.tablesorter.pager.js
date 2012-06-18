@@ -30,6 +30,7 @@
 			}
 			
 			function moveToFirstPage(table) {
+				//alert("caller is " + arguments.callee.caller.toString());
 				var c = table.config;
 				c.page = 0;
 				moveToPage(table);
@@ -65,7 +66,6 @@
 				if(c.page < 0 || c.page > (c.totalPages-1)) {
 					c.page = 0;
 				}
-				
 				renderTable(table,c.rowsCopy);
 			}
 			

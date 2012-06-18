@@ -40,9 +40,9 @@
 			        	<div class="pager">
 			        		<ul>
 			        			<li><span class="first ui-icon ui-icon-seek-first"></span></li>
-			        			<li><span class="prev first ui-icon ui-icon-seek-prev"></span></li>
+			        			<li><span class="prev ui-icon ui-icon-seek-prev"></span></li>
 			        			<li><input class="pagedisplay" type="text"></li>
-			        			<li><span class="next first ui-icon ui-icon-seek-next"></span></li>
+			        			<li><span class="next ui-icon ui-icon-seek-next"></span></li>
 			        			<li><span class="last ui-icon ui-icon-seek-end"></span></li>
 			        			<li>
 			        				<select class="pagesize">
@@ -89,9 +89,9 @@
 			        	<div class="pager">
 			        		<ul>
 			        			<li><span class="first ui-icon ui-icon-seek-first"></span></li>
-			        			<li><span class="prev first ui-icon ui-icon-seek-prev"></span></li>
+			        			<li><span class="prev ui-icon ui-icon-seek-prev"></span></li>
 			        			<li><input class="pagedisplay" type="text"></li>
-			        			<li><span class="next first ui-icon ui-icon-seek-next"></span></li>
+			        			<li><span class="next ui-icon ui-icon-seek-next"></span></li>
 			        			<li><span class="last ui-icon ui-icon-seek-end"></span></li>
 			        			<li>
 			        				<select class="pagesize">
@@ -138,9 +138,9 @@
 			        	<div class="pager">
 			        		<ul>
 			        			<li><span class="first ui-icon ui-icon-seek-first"></span></li>
-			        			<li><span class="prev first ui-icon ui-icon-seek-prev"></span></li>
+			        			<li><span class="prev ui-icon ui-icon-seek-prev"></span></li>
 			        			<li><input class="pagedisplay" type="text"></li>
-			        			<li><span class="next first ui-icon ui-icon-seek-next"></span></li>
+			        			<li><span class="next ui-icon ui-icon-seek-next"></span></li>
 			        			<li><span class="last ui-icon ui-icon-seek-end"></span></li>
 			        			<li>
 			        				<select class="pagesize">
