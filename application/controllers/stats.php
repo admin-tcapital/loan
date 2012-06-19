@@ -13,7 +13,7 @@ class Stats extends CI_Controller {
 	
 	function index()
 	{
-		$this->load->view('template/main', array('content'=>'stats/index', 'location' => 'Home', 'menu' => array('Logout' => 'user/logout', 'Loan' => 'loan/view', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats')));
+		$this->load->view('template/main', array('content'=>'stats/index', 'location' => 'Home', 'menu' => array('Logout' => 'user/logout', 'Report' => 'report/summary', 'Loan' => 'loan/view', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats')));
 	}
 	
 	// --------------------------------------------------------------------
@@ -30,7 +30,8 @@ class Stats extends CI_Controller {
 				'content'=>'stats/payment', 
 				'location' => 'Payments / '.$action, 
 				'menu' => array(
-					'Logout' => 'user/logout', 
+					'Logout' => 'user/logout',
+					'Report' => 'report/summary',
 					'Loan' => 'loan/view', 
 					'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats'
 					)

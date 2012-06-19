@@ -40,3 +40,9 @@ table.tablesorter thead tr .headerSortDown {
 table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
 	background-color: #8dbdd8;
 }
+table.tablesorter tfoot {
+	font-weight: 700;
+}
+table.tablesorter tbody tr td.due {
+	background-color: #FBE6F2;
+}

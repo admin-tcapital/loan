@@ -21,7 +21,8 @@ class Transaction extends CI_Controller {
 				'content'=>'transaction/payment', 
 				'location' => 'Transaction / Payment', 
 				'menu' => array(
-					'Logout' => 'user/logout', 
+					'Logout' => 'user/logout',
+					'Report' => 'report/summary',
 					'Loan' => 'loan/view', 
 					'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats')
 			)

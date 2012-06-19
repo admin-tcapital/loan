@@ -18,6 +18,7 @@ class Search extends CI_Controller {
 				'location' => 'Search / Result', 
 				'menu' => array(
 					'Logout' => 'user/logout', 
+					'Report' => 'report/summary',
 					'Loan' => 'loan/view', 
 					'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats')
 				)
