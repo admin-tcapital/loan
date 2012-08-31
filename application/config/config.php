@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://ambetize/lending/';
+$config['base_url']	= 'http://rampage/lending/';
 
 /*
 |--------------------------------------------------------------------------
@@ -365,7 +365,7 @@ $config['proxy_ips'] = '';
 |Turn debugging on or off
 |
 */
-$config['enable_profiling'] = TRUE;
+$config['enable_profiling'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
