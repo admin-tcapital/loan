@@ -15,19 +15,19 @@
 	        	<form action="" method="post">
 	        		<table class="form_tbl">
 	        			<tr>
-	        				<td>Name:</td>
+	        				<td>Loan Name:</td>
 	        				<td><input type="text" name="lname" value="<?php echo set_value('lname'); ?>" /></td>
 	        			</tr>
 	        			<tr>
-	        				<td>Interest Rate (%):</td>
+	        				<td>Monthly Interest Rate (%):</td>
 	        				<td><input type="text" name="interest" value="<?php echo set_value('interest'); ?>" /></td>
 	        			</tr>
 	        			<tr>
-	        				<td>Terms:</td>
+	        				<td>Months to Pay:</td>
 	        				<td><input type="text" name="terms" value="<?php echo set_value('terms'); ?>" /></td>
 	        			</tr>
 	        			<tr>
-	        				<td>Frequency (days):</td>
+	        				<td>Payment Frequency:</td>
 	        				<td>
 	        					<select name="frequency">
 	        						<option value=""></option>

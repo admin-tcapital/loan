@@ -59,54 +59,7 @@ class Borrower_model extends CI_Model {
 			return FALSE;
 		}
 	}
-	
-	// --------------------------------------------------------------------
-	
-	function calculate($amount, $loan_id, $loan_date)
-	{
-		//get loan parameters
-		$loan = $this->chk_loan_exist(array('id' => $loan_id));
 		
-		//interest
-		$amount_interest = $amount * ($loan->interest/100);
-		
-		//total payments applying interest
-		$amount_total = $amount + $amount_interest * $loan->terms;
-		
-		//payment per term
-		$amount_term = number_format(round($amount / $loan->terms, 2) + $amount_interest, 2, '.', ',');
-		
-		$date = $loan_date;
-		
-		//Loan info
-		$table = '<div id="calculator"><h3>Loan Info</h3>';
-		$table = $table . '<table>';
-		$table = $table . '<tr><td>Loan Name:</td><td>'.$loan->lname.'</td></tr>';
-		$table = $table . '<tr><td>Interest:</td><td>'.$loan->interest.'%</td></tr>';
-		$table = $table . '<tr><td>Terms:</td><td>'.$loan->terms.'</td></tr>';
-		$table = $table . '<tr><td>Frequency:</td><td>Every '.$loan->frequency.' days</td></tr>';
-		$table = $table . '</table>';
-		$table = $table . '<h3>Computation</h3>';
-		$table = $table . '<table>';
-		$table = $table . '<tr><td>Loan Amount:</td><td> '.$this->config->item('currency_symbol') . number_format($amount, 2, '.', ',').'</td></tr>';
-		$table = $table . '<tr><td>Interest:</td><td> '.$this->config->item('currency_symbol') . $amount_interest.'</td></tr>';
-		$table = $table . '<tr><td>Amount Per Term:</td><td> '.$this->config->item('currency_symbol') . $amount_term.'</td></tr>';
-		$table = $table . '<tr><td>Total Payment:</td><td> '.$this->config->item('currency_symbol') . number_format($amount_total, 2, '.', ',').'</td></tr>';
-		$table = $table . '</table>';
-		$table = $table . '<table border="1" cellpadding="5" cellspacing="0">';
-		$table = $table . '<tr><td>Payment #</td><td>Amount ('.$this->config->item('currency_symbol').')</td><td>Payment Date</td></tr>';
-		for ($i = 1; $i <= $loan->terms; $i++)
-		{
-			$frequency = $loan->frequency * $i;
-			$newdate = strtotime ( '+'.$frequency.' day' , strtotime ( $date ) ) ;
-			$newdate = date ( 'm/d/Y' , $newdate );
-			$table = $table . '<tr><td>'.$i.'</td><td>'.$amount_term.'</td><td>'.$newdate.'</td></tr>';
-		}
-		$table = $table . '</table></div>';
-		
-		return $table;
-	}
-	
 	// --------------------------------------------------------------------
 	
 	/**
@@ -168,10 +121,10 @@ class Borrower_model extends CI_Model {
 		$amount_interest = $amount * ($loan->interest/100)/$divisor;
 		
 		//total payments applying interest
-		$amount_total = $amount + $amount_interest * $loan->terms;
+		$amount_total = $amount + $amount_interest * $loan->terms * $divisor;
 		
 		//payment per term
-		$amount_term = number_format(round($amount / $loan->terms, 2) + $amount_interest, 2, '.', '');
+		$amount_term = number_format(round($amount / ($loan->terms * $divisor), 2) + $amount_interest, 2, '.', '');
 		
 		$date = $loan_date;
 		
@@ -196,14 +149,14 @@ class Borrower_model extends CI_Model {
 				'borrower_loan_id' => $id,
 				'lname' => $loan->lname,
 				'interest' => $loan->interest,
-				'terms' => $loan->terms,
+				'terms' => $loan->terms * $divisor,
 				'frequency' => $loan->frequency,
 				'late_fee' => $loan->late_fee
 			)
 		);
 		
 		//insert each payment records to lend_payments
-		for ($i = 1; $i <= $loan->terms; $i++)
+		for ($i = 1; $i <= $loan->terms * $divisor; $i++)
 		{
 			$frequency = $days * $i;
 			$newdate = strtotime ( '+'.$frequency.' day' , strtotime ( $date ) ) ;

@@ -19,15 +19,15 @@
 	        	<form action="" method="post">
 	        		<table class="form_tbl">
 	        			<tr>
-	        				<td>Name:</td>
+	        				<td>Loan Name:</td>
 	        				<td><input type="text" name="lname" value="<?php echo $data->lname; ?>" /></td>
 	        			</tr>
 	        			<tr>
-	        				<td>Interest Rate (%):</td>
+	        				<td>Monthly Interest Rate (%):</td>
 	        				<td><input type="text" name="interest" value="<?php echo $data->interest; ?>" /></td>
 	        			</tr>
 	        			<tr>
-	        				<td>Terms:</td>
+	        				<td>Months to Pay:</td>
 	        				<td><input type="text" name="terms" value="<?php echo $data->terms; ?>" /></td>
 	        			</tr>
 	        			<tr>
