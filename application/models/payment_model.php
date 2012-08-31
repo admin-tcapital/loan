@@ -118,7 +118,7 @@ class Payment_model extends CI_Model {
 	 * Move payment date
 	 * 
 	 */
-	function move_payment($payment_id, $movein_date, $move_all = FALSE)
+	function move_payment($payment_id, $movein_date)
 	{
 		//update payment date
 		$uDate = $this->db->update('lend_payments', array('payment_sched' => $movein_date), array('id' => $payment_id));

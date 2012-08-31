@@ -156,10 +156,12 @@
 					        				<td>Move-in Date:</td>
 					        				<td><input type="text" name="mdate" class="datepicker" value="<?php echo $ipayment->payment_sched; ?>" /></td>
 					        			</tr>
+					        			<!--
 					        			<tr>
 					        				<td></td>
 					        				<td><input type="checkbox" name="move_all" /> adjust remaining payments</td>
 					        			</tr>
+					        			-->
 					        			<tr>
 					        				<td></td>
 					        				<td><input type="submit" name="submit_move" value="Move Payment" /></td>
