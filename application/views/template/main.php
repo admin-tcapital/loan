@@ -33,11 +33,9 @@
 <script type="text/javascript" src="<?php echo base_url() ?>jquery/plugins/jquery.tablesorter.pager.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$( '.button_cart').colorbox({width:'50%', inline:true, href:'#dialog-modal'});
 		$( '.button_edit' ).button({ icons: {primary:'ui-icon-pencil'} });
 		$( '.button_add' ).button({ icons: {primary:'ui-icon-plus'} });
 		$( '.button_back' ).button({ icons: {primary:'ui-icon-triangle-1-w'} });
-		$( '.button_cart' ).button({ icons: {primary:'ui-icon-cart'} });
 		$( '.tablesorter' ).tablesorter({widgets: ['zebra']}); //make table sortable
 		$( '.datepicker' ).datepicker({ dateFormat: 'yy-mm-dd' }); //make datepicker
 		$( '.tablesorter' ).tablesorterPager({container: $(".pager")}); //paginate

@@ -36,7 +36,7 @@ class Payment_model extends CI_Model {
 	// --------------------------------------------------------------------
 	
 	/**
-	 * Get the info of the specified payment
+	 * process payment
 	 * 
 	 */
 	function paid($payment_id) {
@@ -110,6 +110,26 @@ class Payment_model extends CI_Model {
 		} else {
 			return FALSE;
 		}
+	}
+
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Move payment date
+	 * 
+	 */
+	function move_payment($payment_id, $movein_date, $move_all = FALSE)
+	{
+		//update payment date
+		$uDate = $this->db->update('lend_payments', array('payment_sched' => $movein_date), array('id' => $payment_id));
+		
+		//if all were successfull, return TRUE 
+		if ($uDate) {
+			return TRUE;
+		}
+		
+		//if something went wrong return FALSE
+		return FALSE;
 	}
 	
 }

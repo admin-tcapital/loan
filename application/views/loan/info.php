@@ -59,7 +59,7 @@
 				<?php if ($payment) : ?>
 				<div class="manage_menu">
 					<!-- <a href="<?php echo base_url();?>transaction/payment/?id=<?php echo $payment->id; ?>" class="button_cart">Payment</a> -->
-					<span class="button_cart">Payment</span>
+					<span class="button_cart">Payment</span><span class="button_move">Move Payment</span>
 				</div>
 				<?php endif; ?>
 				<div class="clearFix"></div>
@@ -90,7 +90,7 @@
 							$ipayment = $this->Payment_model->get_info($payment->id);
 						?>
 						<div style='display:none'>
-							<div class="frm_container" id="dialog-modal">
+							<div class="frm_container" id="dialog-modal-pay">
 				        		<div class="frm_heading"><span>Payment Confirmation</span></div>
 				        		<div class="frm_inputs">
 				        			<form action="<?php echo base_url(); ?>transaction/paid/<?php echo $payment->id.'/'.$_GET['id']; ?>" method="post">
@@ -118,6 +118,51 @@
 					        			<tr>
 					        				<td></td>
 					        				<td><input type="submit" name="submit_payment" value="Paid" /></td>
+					        			</tr>
+					        		</table>
+					        		<input type="hidden" name="borrower_id" value="<?php echo $_GET['id']; ?>" />
+					        		</form>  
+				        		</div>
+			        		</div>   
+						</div>
+						
+						<div style='display:none'>
+							<div class="frm_container" id="dialog-modal-move">
+				        		<div class="frm_heading"><span>Move Payment Confirmation</span></div>
+				        		<div class="frm_inputs">
+				        			<form action="<?php echo base_url(); ?>transaction/move/<?php echo $payment->id.'/'.$_GET['id']; ?>" method="post">
+					        		<table class="info_view">
+					        			<tr>
+					        				<td>Payment #:</td>
+					        				<td><?php echo $ipayment->payment_number; ?></td>
+					        			</tr>
+					        			<tr>
+					        				<td>Borrower:</td>
+					        				<td><?php echo $ipayment->lname.', '.$ipayment->fname; ?></td>
+					        			</tr>
+					        			<tr>
+					        				<td>Amount:</td>
+					        				<td><?php echo $this->config->item('currency_symbol') . $ipayment->amount; ?></td>
+					        			</tr>
+					        			<tr>
+					        				<td>Due Date:</td>
+					        				<td><?php echo $ipayment->payment_sched; ?></td>
+					        			</tr>
+					        			<tr>
+					        				<td>Status:</td>
+					        				<td><?php echo $ipayment->status; ?></td>
+					        			</tr>
+					        			<tr>
+					        				<td>Move-in Date:</td>
+					        				<td><input type="text" name="mdate" class="datepicker" value="<?php echo $ipayment->payment_sched; ?>" /></td>
+					        			</tr>
+					        			<tr>
+					        				<td></td>
+					        				<td><input type="checkbox" name="move_all" /> adjust remaining payments</td>
+					        			</tr>
+					        			<tr>
+					        				<td></td>
+					        				<td><input type="submit" name="submit_move" value="Move Payment" /></td>
 					        			</tr>
 					        		</table>
 					        		<input type="hidden" name="borrower_id" value="<?php echo $_GET['id']; ?>" />
@@ -223,3 +268,10 @@
 	        </div>
 	        <div class="clearFix"></div>
 		</div>
+		<script type="text/javascript">
+			$( '.button_cart' ).button({ icons: {primary:'ui-icon-cart'} });
+			$( '.button_cart').colorbox({width:'50%', inline:true, href:'#dialog-modal-pay'});
+			
+			$( '.button_move' ).button({ icons: {primary:'ui-icon-transferthick-e-w'} });
+			$( '.button_move').colorbox({width:'50%', inline:true, href:'#dialog-modal-move'});
+		</script>

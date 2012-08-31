@@ -213,7 +213,7 @@ class Loan_model extends CI_Model {
 	 */
 	function next_payment($borrower_loan_id)
 	{
-		$this->db->order_by('payment_number');
+		$this->db->order_by('payment_sched');
 		$loan = $this->db->get_where('lend_payments', array('borrower_loan_id' => $borrower_loan_id, 'status' => 'UNPAID'));
 		
 		if ($loan->num_rows() > 0) {
@@ -338,7 +338,7 @@ class Loan_model extends CI_Model {
 		$this->db->from('lend_payments');
 		$this->db->join('lend_borrower', 'lend_payments.borrower_id = lend_borrower.id');
 		$this->db->where(array('lend_payments.borrower_loan_id' => $loan_id));
-		$this->db->order_by('lend_payments.payment_sched');
+		$this->db->order_by('lend_payments.payment_number');
 		$info = $this->db->get();
 
 		if ($info->num_rows() > 0) {

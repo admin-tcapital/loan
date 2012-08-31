@@ -38,4 +38,14 @@ class Transaction extends CI_Controller {
 			
 		}
 	}
+	
+	function move($payment_id, $loan_id)
+	{
+		$transac = $this->Payment_model->move_payment($payment_id, $_POST['mdate']);
+		
+		if ($transac) {
+			redirect('loan/view_info/?id='.$loan_id, 'refresh');
+			
+		}
+	}
 }
