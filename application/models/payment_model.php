@@ -120,8 +120,18 @@ class Payment_model extends CI_Model {
 	 */
 	function move_payment($payment_id, $movein_date)
 	{
+		//get payment info
+		$query = $this->db->get_where('lend_payments', array('id' => $payment_id));
+		
+		//No Result? exit
+		if ($query->num_rows() == 0) {
+			return FALSE;
+		}
+		
+		$row = $query->row();
+		
 		//update payment date
-		$uDate = $this->db->update('lend_payments', array('payment_sched' => $movein_date), array('id' => $payment_id));
+		$uDate = $this->db->update('lend_payments', array('payment_sched' => $movein_date, 'payment_sched_prev' => $row->payment_sched), array('id' => $payment_id));
 		
 		//if all were successfull, return TRUE 
 		if ($uDate) {

@@ -34,8 +34,12 @@ class Transaction extends CI_Controller {
 		$transac = $this->Payment_model->paid($payment_id);
 		
 		if ($transac) {
-			redirect('loan/view_info/?id='.$loan_id, 'refresh');
+			//insert log
+			$this->load->library('logger');
+			$this->logger->save('payment', $payment_id, 'payment');
 			
+			//then redirect
+			redirect('loan/view_info/?id='.$loan_id, 'refresh');
 		}
 	}
 	
@@ -44,8 +48,12 @@ class Transaction extends CI_Controller {
 		$transac = $this->Payment_model->move_payment($payment_id, $_POST['mdate']);
 		
 		if ($transac) {
-			redirect('loan/view_info/?id='.$loan_id, 'refresh');
+			//insert log
+			$this->load->library('logger');
+			$this->logger->save('payment', $payment_id, 'move');
 			
+			//then redirect
+			redirect('loan/view_info/?id='.$loan_id, 'refresh');
 		}
 	}
 }
