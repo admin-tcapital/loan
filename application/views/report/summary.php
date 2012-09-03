@@ -28,6 +28,7 @@
 			        				$summary = $this->Report_model->get_summary();
 			        				$t_payment = 0; $t_principal = 0; $t_interest = 0; $t_balance = 0;
 			        			?>
+			        			<?php if($summary) : ?>
 			        			<?php foreach ($summary->result() as $row) :?>
 			        			<?php $due = $row->is_due > 0 ? ' class="due"' : ''; ?>
 			        			<tr>
@@ -38,6 +39,7 @@
 			        				<td<?php echo $due; ?>><?php echo $this->config->item('currency_symbol') . number_format($row->t_balance, 2, '.', ','); $t_balance += $row->t_balance; ?></td>
 			        			</tr>
 			        			<?php endforeach; ?>
+			        			<?php endif; ?>
 			        		</tbody>
 			        		<tfoot>
 			        			<tr>
