@@ -217,22 +217,6 @@ td {
 
 
 /*
- * Paginate
- */
-
-.pager ul {
-	margin: auto;
-	padding: 0;
-}
-
-
-.pager ul li {
-	display: inline;
-	margin: 0;
-	float: left;
-}
-
-/*
  * Search tool bar
  */
 .contentSearch {

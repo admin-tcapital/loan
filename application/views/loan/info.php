@@ -184,7 +184,7 @@
 		        		<table class="tablesorter" cellspacing="1">
 			        		<thead>
 			        			<tr>
-			        				<th class="{sorter: false}">Payment #</th>
+			        				<th>Payment #</th>
 			        				<th>Check Date</th>
 			        				<th>Amount</th>
 			        				<th>Status</th>
@@ -202,69 +202,13 @@
 			        			<?php endforeach; ?>
 			        		</tbody>
 			        	</table>
-			        	<div class="pager">
-			        		<ul>
-			        			<li><span class="first ui-icon ui-icon-seek-first"></span></li>
-			        			<li><span class="prev ui-icon ui-icon-seek-prev"></span></li>
-			        			<li><input class="pagedisplay" type="text"></li>
-			        			<li><span class="next ui-icon ui-icon-seek-next"></span></li>
-			        			<li><span class="last ui-icon ui-icon-seek-end"></span></li>
-			        			<li>
-			        				<select class="pagesize">
-										
-										<option value="20" selected="selected">20</option>
-										<option value="30">30</option>
-										<option value="40">40</option>
-									</select>
-			        			</li>
-			        		</ul>
-						</div>
 	        		</div>
         		</div>
         		<div class="clearFix"></div>
         		<div class="frm_container">
 	        		<div class="frm_heading"><span>Transactions</span></div>
 	        		<div class="frm_inputs">
-		        		<table class="tablesorter" cellspacing="1">
-			        		<thead>
-			        			<tr>
-			        				<th>Payment #</th>
-			        				<th>Trans Date</th>
-			        				<th>User</th>
-			        				<th>Description</th>
-			        				<th>Amount</th>
-			        			</tr>
-			        		</thead>
-			        		<tbody>
-			        			<?php $trans = $this->Loan_model->view_transactions($_GET['id']);?>
-			        			<?php foreach ($trans->result() as $transact) :?>
-			        			<tr>
-			        				<td><?php echo $transact->payment_number; ?></td>
-			        				<td><?php echo $transact->transaction_date; ?></td>
-			        				<td><?php echo $transact->username; ?></td>
-			        				<td><?php echo 'Description'; ?></td>
-			        				<td><?php echo $this->config->item('currency_symbol') . $transact->amount; ?></td>
-			        			</tr>
-			        			<?php endforeach; ?>
-			        		</tbody>
-			        	</table>
-			        	<div class="pager">
-			        		<ul>
-			        			<li><span class="first ui-icon ui-icon-seek-first"></span></li>
-			        			<li><span class="prev ui-icon ui-icon-seek-prev"></span></li>
-			        			<li><input class="pagedisplay" type="text"></li>
-			        			<li><span class="next ui-icon ui-icon-seek-next"></span></li>
-			        			<li><span class="last ui-icon ui-icon-seek-end"></span></li>
-			        			<li>
-			        				<select class="pagesize">
-										
-										<option value="20" selected="selected">20</option>
-										<option value="30">30</option>
-										<option value="40">40</option>
-									</select>
-			        			</li>
-			        		</ul>
-						</div>
+						<?php echo $this->logger->show($_GET['id']); ?>
 	        		</div>
         		</div>
 	        </div>

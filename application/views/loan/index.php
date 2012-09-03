@@ -12,7 +12,7 @@
 				</ul>
 	        </div>
 	        <div class="rightcontentBody">
-	        	<table class="tablesorter" cellspacing="1">
+	        	<table class="loan" cellspacing="1">
 	        		<thead>
 	        			<tr>
 	        				<th>Loan #</th>
@@ -39,23 +39,37 @@
 	        			<?php endif; ?>
 	        		</tbody>
 	        	</table>
-	        	<div class="pager">
-	        		<ul>
-	        			<li><span class="first ui-icon ui-icon-seek-first"></span></li>
-	        			<li><span class="prev ui-icon ui-icon-seek-prev"></span></li>
-	        			<li><input class="pagedisplay" type="text"></li>
-	        			<li><span class="next ui-icon ui-icon-seek-next"></span></li>
-	        			<li><span class="last ui-icon ui-icon-seek-end"></span></li>
-	        			<li>
-	        				<select class="pagesize">
-								
-								<option value="20" selected="selected">20</option>
-								<option value="30">30</option>
-								<option value="40">40</option>
-							</select>
-	        			</li>
-	        		</ul>
+	        	<!-- pager -->
+				<div class='loan_pager'>
+				    <img src='<?php echo base_url(); ?>css/tablesorter/first.png' class='first'/>
+				    <img src='<?php echo base_url(); ?>css/tablesorter/prev.png' class='prev'/>
+				    <span class='pagedisplay'></span> <!-- this can be any element, including an input -->
+				    <img src='<?php echo base_url(); ?>css/tablesorter/next.png' class='next'/>
+				    <img src='<?php echo base_url(); ?>css/tablesorter/last.png' class='last'/>
+				    <select class='pagesize'>
+				        <option value='20'>20</option>
+				        <option value='30'>30</option>
+				        <option value='40'>40</option>
+				    </select>
 				</div>
 	        </div>
 	        <div class="clearFix"></div>
 		</div>
+		<script type='text/javascript'>
+			$('.loan').tablesorter()
+				.tablesorterPager({
+				    container: $('.loan_pager'),
+				    updateArrows: true,
+				    page: 0,
+				    size: 20,
+				    fixedHeight: false,
+				    removeRows: false,
+				    cssNext: '.next',
+				    cssPrev: '.prev',
+				    cssFirst: '.first',
+				    cssLast: '.last',
+				    cssPageDisplay: '.pagedisplay',
+				    cssPageSize: '.pagesize',
+				    cssDisabled: 'disabled'
+			});
+		</script>

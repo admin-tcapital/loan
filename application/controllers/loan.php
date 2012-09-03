@@ -9,6 +9,8 @@ class Loan extends CI_Controller {
 		$this->load->model('Loan_model');
 		
 		$this->load->model('Payment_model');
+		
+		$this->load->library('logger');
 	}
 	
 	function view()

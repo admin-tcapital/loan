@@ -11,6 +11,8 @@ class Transaction extends CI_Controller {
 		$this->load->model('Loan_model');
 		
 		$this->load->model('Payment_model');
+		
+		$this->load->library('logger');
 	}
 	
 	function payment()
@@ -35,7 +37,6 @@ class Transaction extends CI_Controller {
 		
 		if ($transac) {
 			//insert log
-			$this->load->library('logger');
 			$this->logger->save('payment', $payment_id, 'payment');
 			
 			//then redirect
@@ -49,7 +50,6 @@ class Transaction extends CI_Controller {
 		
 		if ($transac) {
 			//insert log
-			$this->load->library('logger');
 			$this->logger->save('payment', $payment_id, 'move');
 			
 			//then redirect
