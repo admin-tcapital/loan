@@ -156,6 +156,10 @@
 					        				<td>Move-in Date:</td>
 					        				<td><input type="text" name="mdate" class="datepicker" value="<?php echo $ipayment->payment_sched; ?>" /></td>
 					        			</tr>
+					        			<tr>
+					        				<td>Notes:</td>
+					        				<td><textarea name="notes" rows="5" cols="45"></textarea></td>
+					        			</tr>
 					        			<!--
 					        			<tr>
 					        				<td></td>

@@ -12,7 +12,7 @@ class Logger {
 		$this->user_id = $this->CI->session->userdata('lend_user_id');
 	}
 
-	public function save($affected = '', $id = 0, $type = '')
+	public function save($affected = '', $id = 0, $type = '', $notes)
 	{
 		if ($affected != '') {
 			switch ($affected) {
@@ -42,10 +42,11 @@ class Logger {
 		//generate description
 		switch ($type) {
 			case 'payment':
-				$description = "Payment #({$row->payment_number}), Amount({$row->amount})";
+				$description = "<strong>Payment #</strong>({$row->payment_number}), <strong>Amount</strong>({$row->amount})";
 				break;
 			case 'move':
-				$description = "Payment #({$row->payment_number}), Original Date({$row->payment_sched_prev}), Move-in Date({$row->payment_sched})";
+				$description = "<strong>Payment #</strong>({$row->payment_number}), <strong>Original Date</strong>({$row->payment_sched_prev}), <strong>Move-in Date</strong>({$row->payment_sched})";
+				$description .= empty($notes)?'':", <br /><strong>Notes</strong>: ".$notes;
 				break;
 			default:
 				$description = '';

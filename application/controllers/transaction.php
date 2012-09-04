@@ -50,7 +50,7 @@ class Transaction extends CI_Controller {
 		
 		if ($transac) {
 			//insert log
-			$this->logger->save('payment', $payment_id, 'move');
+			$this->logger->save('payment', $payment_id, 'move', $_POST['notes']);
 			
 			//then redirect
 			redirect('loan/view_info/?id='.$loan_id, 'refresh');
