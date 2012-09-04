@@ -32,6 +32,10 @@
 	        				<td><input type="text" name="amount" value="<?php echo set_value('amount'); ?>" /></td>
 	        			</tr>
 	        			<tr>
+	        				<td>Months to Pay:</td>
+	        				<td><input type="text" name="months" value="<?php echo set_value('months'); ?>" /></td>
+	        			</tr>
+	        			<tr>
 	        				<td>Select Loan Type:</td>
 	        				<td><?php echo form_dropdown('loan_type', $loan_types); ?></td>
 	        			</tr>

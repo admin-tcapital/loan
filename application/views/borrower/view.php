@@ -165,7 +165,11 @@
 		        		<table class="form_tbl">
 		        			<tr>
 		        				<td>Loan Amout:</td>
-		        				<td><input type="text" name="loan_amount" value="<?php echo set_value('amount'); ?>" /></td>
+		        				<td><input type="text" name="loan_amount" value="<?php echo set_value('loan_amount'); ?>" /></td>
+		        			</tr>
+		        			<tr>
+		        				<td>Months to Pay:</td>
+		        				<td><input type="text" name="loan_months" value="<?php echo set_value('loan_months'); ?>" /></td>
 		        			</tr>
 		        			<tr>
 		        				<td>Select Loan Type:</td>

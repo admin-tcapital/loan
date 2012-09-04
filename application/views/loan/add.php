@@ -22,10 +22,12 @@
 	        				<td>Monthly Interest Rate (%):</td>
 	        				<td><input type="text" name="interest" value="<?php echo set_value('interest'); ?>" /></td>
 	        			</tr>
+	        			<!-- 
 	        			<tr>
 	        				<td>Months to Pay:</td>
 	        				<td><input type="text" name="terms" value="<?php echo set_value('terms'); ?>" /></td>
 	        			</tr>
+	        			-->
 	        			<tr>
 	        				<td>Payment Frequency:</td>
 	        				<td>

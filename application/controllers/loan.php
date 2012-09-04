@@ -55,8 +55,8 @@ class Loan extends CI_Controller {
 		//validation
 		$this->form_validation->set_rules('lname', 'Loan Name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('interest', 'Interest', 'trim|required|xss_clean|numeric');
-		$this->form_validation->set_rules('terms', 'Terms', 'trim|required|xss_clean|numeric');
-		$this->form_validation->set_rules('frequency', 'Frequency', 'trim|required|xss_clean|numeric');
+		//$this->form_validation->set_rules('terms', 'Terms', 'trim|required|xss_clean|numeric');
+		$this->form_validation->set_rules('frequency', 'Frequency', 'trim|required|xss_clean');
 
 		if($this->form_validation->run() == FALSE)
 		{
@@ -89,7 +89,7 @@ class Loan extends CI_Controller {
 		//validation
 		$this->form_validation->set_rules('lname', 'Loan Name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('interest', 'Interest', 'trim|required|xss_clean|numeric');
-		$this->form_validation->set_rules('terms', 'Terms', 'trim|required|xss_clean|numeric');
+		//$this->form_validation->set_rules('terms', 'Terms', 'trim|required|xss_clean|numeric');
 		$this->form_validation->set_rules('frequency', 'Frequency', 'trim|required|xss_clean');
 
 		if($this->form_validation->run() == FALSE)
@@ -125,6 +125,7 @@ class Loan extends CI_Controller {
 		//validation
 		$this->form_validation->set_rules('amount', 'Amount', 'trim|required|xss_clean|numeric');
 		$this->form_validation->set_rules('loan_type', 'Loan Type', 'trim|required|xss_clean|numeric');
+		$this->form_validation->set_rules('months', 'Months', 'trim|required|xss_clean|numeric');
 		$this->form_validation->set_rules('loan_date', 'Loan Date', 'trim|required|xss_clean');
 
 		if($this->form_validation->run() == FALSE)
@@ -141,7 +142,7 @@ class Loan extends CI_Controller {
 				$exist = $this->Loan_model->chk_loan_exist(array('id' => $id));
 				
 				if ($exist) {
-					$result = $this->Loan_model->calculate($this->input->post('amount'), $this->input->post('loan_type'), $this->input->post('loan_date'));
+					$result = $this->Loan_model->calculate($this->input->post('amount'), $this->input->post('months'), $this->input->post('loan_type'), $this->input->post('loan_date'));
 					$this->load->view('template/main', array('content' => 'loan/calculator', 'data' => array('result' => $result), 'location' => 'Loan / Loan Calculator', 'menu' => array('Logout' => 'user/logout', 'Report' => 'report/summary', 'Loan' => 'loan/view', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats')));
 				} else {
 					$this->load->view('template/main', array('content' => 'loan/calculator', 'data' => array('error' => '<div class="error">Sorry, loan don\'t exist.</div>'), 'location' => 'Login', 'menu' => array('Logout' => 'user/logout', 'Report' => 'report/summary', 'Loan' => 'loan/view', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats')));

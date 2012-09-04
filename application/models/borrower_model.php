@@ -97,7 +97,7 @@ class Borrower_model extends CI_Model {
 		
 		$amount = $param['loan_amount'];
 		$loan_date = $param['loan_date'];
-		
+		$months = $param['loan_months'];
 		//get loan parameters
 		$loan = $this->Loan_model->chk_loan_exist(array('id' => $param['loan_id']));
 		
@@ -121,10 +121,10 @@ class Borrower_model extends CI_Model {
 		$amount_interest = $amount * ($loan->interest/100)/$divisor;
 		
 		//total payments applying interest
-		$amount_total = $amount + $amount_interest * $loan->terms * $divisor;
+		$amount_total = $amount + $amount_interest * $months * $divisor;
 		
 		//payment per term
-		$amount_term = number_format(round($amount / ($loan->terms * $divisor), 2) + $amount_interest, 2, '.', '');
+		$amount_term = number_format(round($amount / ($months * $divisor), 2) + $amount_interest, 2, '.', '');
 		
 		$date = $loan_date;
 		
@@ -149,14 +149,15 @@ class Borrower_model extends CI_Model {
 				'borrower_loan_id' => $id,
 				'lname' => $loan->lname,
 				'interest' => $loan->interest,
-				'terms' => $loan->terms * $divisor,
+				'months' => $months,
+				'terms' => $months * $divisor,
 				'frequency' => $loan->frequency,
 				'late_fee' => $loan->late_fee
 			)
 		);
 		
 		//insert each payment records to lend_payments
-		for ($i = 1; $i <= $loan->terms * $divisor; $i++)
+		for ($i = 1; $i <= $months * $divisor; $i++)
 		{
 			$frequency = $days * $i;
 			$newdate = strtotime ( '+'.$frequency.' day' , strtotime ( $date ) ) ;
