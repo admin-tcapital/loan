@@ -197,11 +197,25 @@
 			        		<tbody>
 			        			<?php $payments = $this->Loan_model->payments_overview($_GET['id']);?>
 			        			<?php foreach ($payments->result() as $payment) :?>
-			        			<tr>
-			        				<td><?php echo $payment->payment_number ;?></td>
-			        				<td><?php echo $payment->payment_sched ;?></td>
-			        				<td><?php echo $this->config->item('currency_symbol') . $payment->amount ;?></td>
-			        				<td><span style="color:<?php echo $payment->status=='PAID' ? 'GREEN' : 'RED'?>"><?php echo $payment->status; ?></span></td>
+			        			<?php 
+			        				//change color depending on it's status
+			        				$css = '';
+									$xstatus = '';
+			        				if($payment->is_due > 0  AND $payment->status == 'UNPAID') {
+			        					$css = ' class="due"';
+										$xstatus = ' | OVER DUE';
+			        				} elseif($payment->status=='PAID') {
+			        					$css = ' class="paid"';
+			        				} elseif($payment->is_due == 0  AND $payment->status == 'UNPAID') {
+			        					$css = ' class="due_now"';
+			        					$xstatus = ' | DUE TODAY';
+									}
+			        			?>
+			        			<tr style="font-weight: <?php echo !empty($xstatus)?'900':'200'; ?>;">
+			        				<td<?php echo $css; ?>><?php echo $payment->payment_number ;?></td>
+			        				<td<?php echo $css; ?>><?php echo $payment->payment_sched ;?></td>
+			        				<td<?php echo $css; ?>><?php echo $this->config->item('currency_symbol') . $payment->amount ;?></td>
+			        				<td<?php echo $css; ?>><span style="color:<?php echo $payment->status=='PAID' ? 'GREEN' : 'RED'?>"><?php echo $payment->status.$xstatus; ?></span></td>
 			        			</tr>
 			        			<?php endforeach; ?>
 			        		</tbody>

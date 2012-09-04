@@ -39,6 +39,9 @@ table.tablesorter tbody td {
 	background-color: #fff;
 	vertical-align: top;
 }
+table.tablesorter tbody td.due {background-color: #F3D8D8}
+table.tablesorter tbody td.paid {background-color: #D1EFD1}
+table.tablesorter tbody td.due_now {background-color: #DFEFFF}
 table.tablesorter th.headerSortUp,
 table.tablesorter th.tablesorter-headerSortUp {
 	background-color: #9fbfdf;

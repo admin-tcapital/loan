@@ -12,7 +12,7 @@ class Logger {
 		$this->user_id = $this->CI->session->userdata('lend_user_id');
 	}
 
-	public function save($affected = '', $id = 0, $type = '', $notes)
+	public function save($affected = '', $id = 0, $type = '', $notes = '')
 	{
 		if ($affected != '') {
 			switch ($affected) {
