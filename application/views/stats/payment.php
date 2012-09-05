@@ -3,13 +3,7 @@
 			<div class="contentTitle">Payments</div>
 			<div class="clearFix"></div>
 			<div class="leftcontentBody">
-				<ul>
-					<li><a href="<?php echo base_url(); ?>stats">Home</a></li><li><a href="<?php echo base_url(); ?>loan/view/">Loan</a></li>
-					<li><a href="<?php echo base_url(); ?>borrower/">Borrower</a></li>
-					<li><a href="<?php echo base_url(); ?>stats/payments">Payments</a></li>
-					<li class="submenu"><a href="<?php echo base_url(); ?>stats/payments/received">Received</a></li>
-					<li class="submenu"><a href="<?php echo base_url(); ?>stats/payments/incoming">Incoming</a></li>
-				</ul>
+				<?php $this->menu->generate(); ?>
 	        </div>
 	        <div class="rightcontentBody">
 	        	<div class="frm_container">

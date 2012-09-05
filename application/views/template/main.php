@@ -46,7 +46,7 @@
 <body>
 	<div id="content">
 		<div id="contentHeader">
-			<div style="width: 820px; margin-left: 200px;">
+			<div id="header-wrapper">
 				<div id="nslogo"></div>
 				<div id="appTitle">Lending System</div>
 				<?php isset($_SESSION['lend_user']) ? $this->load->view('template/top-menu') : FALSE; //load top menus on user login ?>
@@ -54,34 +54,20 @@
 		</div>
 		<div id="navMenu">
 			<?php $this->load->view('template/location', array('location' => $location)); //load location ?>
-			<div>
-				<?php $this->load->view('template/menu', array('menu' => $menu)); //load menus on user login ?>
-			</div>
-			<?php if ($this->router->class != 'user') : ?>
-			<div class="clearFix"></div>
 			<div id="searchwrapper">
 				<form action="<?php echo base_url(); ?>search/loan">
 					<input type="text" class="searchbox" name="s" value="<?php echo isset($_GET['s']) ? $_GET['s']: NULL; ?>" />
 					<input type="submit" class="searchbox_submit" value="" />
 				</form>
 			</div>
-			<!-- old search box
-			<div class="contentSearch">
-				<div id="search_label">SEARCH</div>
-				<table>
-					<tr>
-						<td><form action="<?php echo base_url(); ?>search/loan">Loan #: <input type="text" name="loan_id" value="<?php echo isset($_GET['loan_id']) ? $_GET['loan_id']: NULL; ?>" /><input type="submit" name="submit_search_loan" value="GO" /></form></td>
-						<td><form action="<?php echo base_url(); ?>search/loan">Customer Name: <input type="text" name="customer_name" value="<?php echo isset($_GET['customer_name']) ? $_GET['customer_name']: NULL; ?>"/><input type="submit" name="submit_search_name" value="GO" /></form></td>
-					</tr>
-				</table>
-			</div>
-			-->
+			<?php if ($this->router->class != 'user') : ?>
+			<div class="clearFix"></div>
 			<?php endif; ?>
 		</div>
 		
 		<?php isset($data) ? $this->load->view($content, $data) : $this->load->view($content); //load page content ?>
 		<div class="clearFix"></div>
-		<div id="contentFooter">Copyright 2011. Northstar Solutions, Inc. All
+		<div id="contentFooter">Copyright 2012. Northstar Solutions, Inc. All
 			Rights Reserved.
 		</div>
 	</div>
