@@ -66,6 +66,7 @@ class Menu {
 				)
 			)
 		);
+		$menu_arr[] = array('text' => 'Logout', 'controller' => 'user', 'function' => 'logout');
 		
 		//print_r($menu_arr);
 		

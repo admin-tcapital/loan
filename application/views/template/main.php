@@ -54,17 +54,15 @@
 		</div>
 		<div id="navMenu">
 			<?php $this->load->view('template/location', array('location' => $location)); //load location ?>
+			<?php if ($this->router->class != 'user') : ?>
 			<div id="searchwrapper">
 				<form action="<?php echo base_url(); ?>search/loan">
 					<input type="text" class="searchbox" name="s" value="<?php echo isset($_GET['s']) ? $_GET['s']: NULL; ?>" />
 					<input type="submit" class="searchbox_submit" value="" />
 				</form>
 			</div>
-			<?php if ($this->router->class != 'user') : ?>
-			<div class="clearFix"></div>
 			<?php endif; ?>
 		</div>
-		
 		<?php isset($data) ? $this->load->view($content, $data) : $this->load->view($content); //load page content ?>
 		<div class="clearFix"></div>
 		<div id="contentFooter">Copyright 2012. Northstar Solutions, Inc. All
