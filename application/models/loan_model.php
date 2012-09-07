@@ -165,8 +165,16 @@ class Loan_model extends CI_Model {
 		for ($i = 1; $i <= $months * $divisor; $i++)
 		{
 			$frequency = $days * $i;
-			$newdate = strtotime ( '+'.$frequency.' day' , strtotime ( $date ) ) ;
-			$newdate = date ( 'm/d/Y' , $newdate );
+			$newdate = strtotime ('+'.$frequency.' day', strtotime($date)) ;
+			//check if payment date landed on weekend
+			//if Sunday, make it Monday. If Saturday, make it Friday
+			if(date('D', $newdate) == 'Sun') {
+				$newdate = strtotime('+1 day', $newdate) ;
+			} elseif(date ('D' , $newdate) == 'Sat') {
+				$newdate = strtotime('-1 day', $newdate) ;
+			}
+			
+			$newdate = date('m/d/Y', $newdate);
 			$table = $table . '<tr><td>'.$i.'</td><td>'.$amount_term.'</td><td>'.$newdate.'</td></tr>';
 		}
 		$table = $table . '</table></div>';

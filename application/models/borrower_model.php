@@ -160,8 +160,17 @@ class Borrower_model extends CI_Model {
 		for ($i = 1; $i <= $months * $divisor; $i++)
 		{
 			$frequency = $days * $i;
-			$newdate = strtotime ( '+'.$frequency.' day' , strtotime ( $date ) ) ;
-			$newdate = date ( 'Y-m-d' , $newdate );
+			$newdate = strtotime ('+'.$frequency.' day', strtotime ($date)) ;
+			
+			//check if payment date landed on weekend
+			//if Sunday, make it Monday. If Saturday, make it Friday
+			if(date ('D', $newdate) == 'Sun') {
+				$newdate = strtotime('+1 day', $newdate) ;
+			} elseif(date('D', $newdate) == 'Sat') {
+				$newdate = strtotime('-1 day', $newdate) ;
+			}
+			
+			$newdate = date('Y-m-d', $newdate );
 			
 			$this->db->insert(
 				'lend_payments', array(
