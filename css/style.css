@@ -258,7 +258,8 @@ td {
 	height:40px;/*follow your image's size*/
 	background-image: url("searchbox.jpg");
 	background-repeat:no-repeat; /*important*/
-	margin-left:605px;
+	margin-left:612px;
+	margin-top: 10px;
 	position:absolute; /*important*/
 	}
 	 
