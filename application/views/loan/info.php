@@ -53,7 +53,7 @@
 				<?php if ($payment) : ?>
 				<div class="manage_menu">
 					<!-- <a href="<?php echo base_url();?>transaction/payment/?id=<?php echo $payment->id; ?>" class="button_cart">Payment</a> -->
-					<span class="button_cart">Payment</span><span class="button_move">Move Payment</span>
+					<span class="button_cart">Payment</span><span class="button_advance">Adv. Payment</span><span class="button_move">Move Payment</span>
 				</div>
 				<?php endif; ?>
 				<div class="clearFix"></div>
@@ -112,6 +112,71 @@
 					        			<tr>
 					        				<td></td>
 					        				<td><input type="submit" name="submit_payment" value="Paid" /></td>
+					        			</tr>
+					        		</table>
+					        		<input type="hidden" name="borrower_id" value="<?php echo $_GET['id']; ?>" />
+					        		</form>  
+				        		</div>
+			        		</div>   
+						</div>
+
+
+						<div style='display:none'>
+							<div class="frm_container" id="dialog-modal-advance">
+				        		<div class="frm_heading"><span>Advance Payment Confirmation</span></div>
+				        		<div class="frm_inputs">
+				        			<form action="<?php echo base_url(); ?>transaction/advance/<?php echo $_GET['id']; ?>"  method="post">
+					        		<table class="info_view">
+					        			<tr>
+					        				<td>Borrower:</td>
+					        				<td><?php echo $ipayment->lname.', '.$ipayment->fname; ?></td>
+					        			</tr>
+					        			<tr>
+					        				<td>Unpaid Payments:</td>
+					        				<td>
+					        					<table class="tablesorter" cellspacing="1">
+									        		<thead>
+									        			<tr>
+									        				<th>Payment #</th>
+									        				<th>Check Date</th>
+									        				<th>Amount</th>
+									        				<th>Status</th>
+									        				<th></th>
+									        			</tr>
+									        		</thead>
+									        		<tbody>
+									        			<?php $payments = $this->Loan_model->unpaid_payments($_GET['id']);?>
+									        			<?php foreach ($payments->result() as $_payment) :?>
+									        			<?php 
+									        				//change color depending on it's status
+									        				$css = '';
+															$xstatus = '';
+									        				if($_payment->is_due > 0  AND $_payment->status == 'UNPAID') {
+									        					$css = ' class="due"';
+																$xstatus = ' | OVER DUE';
+									        				} elseif($_payment->status=='PAID') {
+									        					$css = ' class="paid"';
+									        				} elseif($_payment->is_due == 0  AND $_payment->status == 'UNPAID') {
+									        					$css = ' class="due_now"';
+									        					$xstatus = ' | DUE TODAY';
+															}
+									        			?>
+									        			<tr style="font-weight: <?php echo !empty($xstatus)?'900':'200'; ?>;">
+									        				<td<?php echo $css; ?>><?php echo $_payment->payment_number ;?></td>
+									        				<td<?php echo $css; ?>><?php echo $_payment->payment_sched ;?></td>
+									        				<td<?php echo $css; ?>><?php echo $this->config->item('currency_symbol') . $_payment->amount ;?></td>
+									        				<td<?php echo $css; ?>><span style="color:<?php echo $_payment->status=='PAID' ? 'GREEN' : 'RED'?>"><?php echo $_payment->status.$xstatus; ?></span></td>
+									        				<td<?php echo $css; ?>><input type="checkbox" name="payment[]" value="<?php echo $_payment->payment_id; ?>"></td>
+									        			</tr>
+									        			<?php endforeach; ?>
+									        		</tbody>
+									        	</table>
+
+					        				</td>
+					        			</tr>
+					        			<tr>
+					        				<td></td>
+					        				<td><input type="submit" name="submit_advpayment" value="Process" /></td>
 					        			</tr>
 					        		</table>
 					        		<input type="hidden" name="borrower_id" value="<?php echo $_GET['id']; ?>" />
@@ -229,6 +294,9 @@
 		<script type="text/javascript">
 			$( '.button_cart' ).button({ icons: {primary:'ui-icon-cart'} });
 			$( '.button_cart').colorbox({width:'50%', inline:true, href:'#dialog-modal-pay'});
+
+			$( '.button_advance' ).button({ icons: {primary:'ui-icon-cart'} });
+			$( '.button_advance').colorbox({width:'50%', inline:true, href:'#dialog-modal-advance'});
 			
 			$( '.button_move' ).button({ icons: {primary:'ui-icon-transferthick-e-w'} });
 			$( '.button_move').colorbox({width:'50%', inline:true, href:'#dialog-modal-move'});

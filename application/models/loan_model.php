@@ -355,5 +355,28 @@ class Loan_model extends CI_Model {
 			return FALSE;
 		}
 	}
+
+
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Get unpaid payments
+	 * 
+	 */
+	function unpaid_payments($loan_id)
+	{
+		$this->db->select("*, datediff(NOW(), lend_payments.payment_sched) as is_due, lend_payments.id as payment_id", FALSE);
+		$this->db->from('lend_payments');
+		$this->db->join('lend_borrower', 'lend_payments.borrower_id = lend_borrower.id');
+		$this->db->where(array('lend_payments.borrower_loan_id' => $loan_id, 'lend_payments.status' => 'UNPAID'));
+		$this->db->order_by('lend_payments.payment_number');
+		$info = $this->db->get();
+
+		if ($info->num_rows() > 0) {
+			return $info;
+		} else {
+			return FALSE;
+		}
+	}
 	
 }

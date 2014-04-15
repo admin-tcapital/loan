@@ -36,7 +36,7 @@ class Payment_model extends CI_Model {
 	// --------------------------------------------------------------------
 	
 	/**
-	 * process payment
+	 * process single payment
 	 * 
 	 */
 	function paid($payment_id) {
@@ -61,6 +61,59 @@ class Payment_model extends CI_Model {
 		//if all were successfull, return TRUE 
 		if ($uStatus AND $uTransact) {
 			return TRUE;
+		}
+		
+		//if something went wrong return FALSE
+		return FALSE;
+	}
+
+	// --------------------------------------------------------------------
+	
+	/**
+	 * process multiple payments
+	 * 
+	 */
+	function advance_paid($payments) {
+
+		$total_payments = 0;
+		$payment_ids = array();
+
+		//insert advance payment record
+		$advPayment = $this->db->insert('lend_advance_payments', array('admin_id' => $this->session->userdata('lend_user_id')));
+		$advPayment_id = $this->db->insert_id();
+
+		foreach ($payments as $payment_id) {
+			//get first the infos
+			$info = $this->get_info($payment_id);
+			
+			//put payment ids in one string variable
+			$payment_ids[] = $payment_id;
+
+			//update payment status to PAID
+			$uStatus = $this->db->update('lend_payments', array('status' => 'PAID'), array('id' => $payment_id));
+			
+			//compute total payments made
+			$total_payments += $info->amount;
+
+			//if it was the last payment, CLOSED the loan
+			$this->db->select('MAX(id) as last_payment');
+			$payment = $this->db->get_where('lend_payments', array('borrower_loan_id' => $info->borrower_loan_id));
+			$result = $payment->row();
+			
+			if($result->last_payment == $payment_id) {
+				$this->db->update('lend_borrower_loans', array('status' => 'CLOSED'), array('id' => $info->borrower_loan_id));
+			}
+
+			//insert transaction
+			$uTransact = $this->db->insert('lend_transactions', array('advance_payment_id' => $advPayment_id, 'borrower_id' => $info->borrower_id, 'borrower_id' => $info->borrower_id, 'payment' => $info->amount, 'admin_id' => $this->session->userdata('lend_user_id'), 'payment_id' => $info->payment_id));
+		}
+		
+		//update advance payment info
+		$uAdvPayment = $this->db->update('lend_advance_payments', array('payment_ids' => implode(",", $payment_ids), 'total_payments' => $total_payments, 'admin_id' => $this->session->userdata('lend_user_id'), 'borrower_id' => $info->borrower_id, 'borrower_loan_id' => $info->borrower_loan_id), array('id' => $advPayment_id));
+
+		//if all were successfull, return TRUE 
+		if ($uAdvPayment) {
+			return $advPayment_id;
 		}
 		
 		//if something went wrong return FALSE

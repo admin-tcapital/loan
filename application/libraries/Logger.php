@@ -19,6 +19,9 @@ class Logger {
 				case 'payment': 
 					$table = 'lend_payments';
 					break;
+				case 'advance_payment': 
+					$table = 'lend_advance_payments';
+					break;
 				case 'loan':
 					$table = 'lend_borrower_loans';
 					break;
@@ -43,6 +46,9 @@ class Logger {
 		switch ($type) {
 			case 'payment':
 				$description = "<strong>Payment #</strong>({$row->payment_number}), <strong>Amount</strong>({$row->amount})";
+				break;
+			case 'advance_payment':
+				$description = "<strong>Payment #</strong>({$this->get_payment_number(explode(',', $row->payment_ids))}), <strong>Total Amount</strong>({$row->total_payments})";
 				break;
 			case 'move':
 				$description = "<strong>Payment #</strong>({$row->payment_number}), <strong>Original Date</strong>({$row->payment_sched_prev}), <strong>Move-in Date</strong>({$row->payment_sched})";
@@ -133,5 +139,27 @@ class Logger {
 			</script>
 		";
 		return $table.$javascript;
+	}
+
+
+	private function get_payment_number($payment_id) {
+		if(is_array($payment_id)) {
+			$payment_numbers = array();
+
+			foreach ($payment_id as $payment) {
+				$query = $this->CI->db->get_where('lend_payments', array('id' => $payment), 1);
+				$row = $query->row();
+
+				$payment_numbers[] = $row->payment_number;
+			}
+
+			return implode(',', $payment_numbers);
+		} else {
+			$query = $this->CI->db->get_where('lend_payments', array('id' => $payment_id), 1);
+
+			$row = $query->row();
+
+			return $row->payment_number;
+		}
 	}
 }

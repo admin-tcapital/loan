@@ -56,4 +56,23 @@ class Transaction extends CI_Controller {
 			redirect('loan/view_info/?id='.$loan_id, 'refresh');
 		}
 	}
+
+	/**
+	 * Process advance payments
+	 * 
+	 */
+	function advance($loan_id)
+	{
+		if(count($_POST['payment'] > 0)) {
+			$advance_payment_id = $this->Payment_model->advance_paid($_POST['payment']);
+		}
+
+		if ($advance_payment_id) {
+			//insert log
+			$this->logger->save('advance_payment', $advance_payment_id, 'advance_payment');
+			
+			//then redirect
+			redirect('loan/view_info/?id='.$loan_id, 'refresh');
+		}
+	}
 }
