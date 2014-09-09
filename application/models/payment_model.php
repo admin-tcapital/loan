@@ -126,7 +126,7 @@ class Payment_model extends CI_Model {
 	 * Get incoming payments
 	 * 
 	 */
-	function get_incoming_payments()
+	function get_incoming_payments($filter = array())
 	{
 		$this->db->select('*');
 		$this->db->from('lend_payments');
@@ -148,7 +148,7 @@ class Payment_model extends CI_Model {
 	 * Get received payments
 	 * 
 	 */
-	function get_received_payments()
+	function get_received_payments($filter = array())
 	{
 		$this->db->select('*, lend_transactions.rdate as process_date ');
 		$this->db->from('lend_transactions');
@@ -156,6 +156,10 @@ class Payment_model extends CI_Model {
 		$this->db->join('lend_admin', 'lend_transactions.admin_id = lend_admin.id');
 		$this->db->join('lend_payments', 'lend_transactions.payment_id = lend_payments.id');
 		$this->db->order_by('lend_transactions.rdate', 'DESC');
+
+		if(count($filter) > 0) {
+			$this->db->where(array('lend_payments.rdate >=' => $filter['sdate'], 'lend_payments.rdate <=' => $filter['edate']));
+		}
 		$info = $this->db->get();
 
 		if ($info->num_rows() > 0) {

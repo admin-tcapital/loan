@@ -22,11 +22,12 @@ class Stats extends CI_Controller {
 	 * View all future payments
 	 * 
 	 */
-	function payments($action = NULL)
+	function payments($action = NULL, $filter = FALSE)
 	{
 		$this->load->view(
 			'template/main', 
 			array(
+				'filter' => $filter,
 				'content'=>'stats/payment', 
 				'location' => 'Payments / '.$action, 
 				'menu' => array(
