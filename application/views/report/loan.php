@@ -118,7 +118,7 @@
 						<td colspan="4"></td>
 						<td colspan="2">
 							<table>
-								<tr><td>Loan ID:</td><td><strong><?= $loan->id ?></strong></td></tr>
+								<tr><td>Loan ID:</td><td><strong><?= $loan->borrower_loan_id ?></strong></td></tr>
 								<tr><td>Loan Date:</td><td><strong><?= $loan->loan_date ?></strong></td></tr>
 								<tr><td>Maturity Date:</td><td><strong><?= $maturity ?></strong></td></tr>
 								<tr><td>First Deduction:</td><td><strong><?= $first_payment ?></strong></td></tr>

@@ -1,5 +1,7 @@
 		<?php 
 			$data = $this->Borrower_model->chk_borrower_exist(array('id' => $_GET['id']));
+
+
 		?>
 		<div class="clearFix"></div>
 		<div class="contentBody">

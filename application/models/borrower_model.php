@@ -194,31 +194,84 @@ class Borrower_model extends CI_Model {
 		);
 		
 		//insert each payment records to lend_payments
-		for ($i = 1; $i <= $months * $divisor; $i++)
-		{
-			$frequency = $days * $i;
-			$newdate = strtotime ('+'.$frequency.' day', strtotime ($date)) ;
-			
-			//check if payment date landed on weekend
-			//if Sunday, make it Monday. If Saturday, make it Friday
-			if(date ('D', $newdate) == 'Sun') {
-				$newdate = strtotime('+1 day', $newdate) ;
-			} elseif(date('D', $newdate) == 'Sat') {
-				$newdate = strtotime('-1 day', $newdate) ;
+		if($loan->frequency == '2 Weeks') {
+			$date = $loan_date;
+			$frequency = $months*2;
+			$start_day = 0;
+			$loan_day = date('d', strtotime($date));
+			$loan_month = date('m', strtotime($date));
+
+			//get first payment day if 15 or 30
+			if($loan_day >= 15) {
+				if($loan_month == '02') {
+					$start_day = 28;
+				} else {
+					$start_day = 30;
+				}
+			} elseif($loan_day == 30 OR $loan_day > 15) {
+				$start_day = 15;
+			} else {
+				$start_day = 15;
+			}
+
+			$date = date('Y/m/'.$start_day, strtotime($date));
+			for ($i=1; $i<=$frequency; $i++) { 
+				$this->db->insert(
+					'lend_payments', array(
+						'borrower_id' => $param['borrower_id'],
+						'borrower_loan_id' => $id,
+						'payment_sched' => $date,
+						'payment_number' => $i,
+						'amount' => $amount_term
+					)
+				);
+				
+				$day = date('d', strtotime($date));
+				if($day == 15) {
+					//check if February
+					if(date('m', strtotime($date)) == '02') {
+						$date = date('Y/02/28', strtotime($date));
+					} else {
+						$date = date('Y/m/30', strtotime($date));
+					}
+				} elseif($day == 30 OR $day > 15) {
+					//check if January, going to February
+					if(date('m', strtotime($date)) == '01') {
+						$date = date('Y/02/15', strtotime('+1 month', strtotime($date)));
+					} else {
+						$date = date('Y/m/15', strtotime('+1 month', strtotime($date)));
+					}
+				}
+
+			}
+		} else {
+			for ($i = 1; $i <= $months * $divisor; $i++)
+			{
+				$frequency = $days * $i;
+				$newdate = strtotime ('+'.$frequency.' day', strtotime ($date)) ;
+
+				//check if payment date landed on weekend
+				//if Sunday, make it Monday. If Saturday, make it Friday
+				if(date ('D', $newdate) == 'Sun') {
+					$newdate = strtotime('+1 day', $newdate) ;
+				} elseif(date('D', $newdate) == 'Sat') {
+					$newdate = strtotime('-1 day', $newdate) ;
+				}
+
+				$newdate = date('Y-m-d', $newdate );
+				
+				$this->db->insert(
+					'lend_payments', array(
+						'borrower_id' => $param['borrower_id'],
+						'borrower_loan_id' => $id,
+						'payment_sched' => $newdate,
+						'payment_number' => $i,
+						'amount' => $amount_term
+					)
+				);
+				//$table = $table . '<tr><td>'.$i.'</td><td>'.$amount_term.'</td><td>'.$newdate.'</td></tr>';
 			}
 			
-			$newdate = date('Y-m-d', $newdate );
-			
-			$this->db->insert(
-				'lend_payments', array(
-					'borrower_id' => $param['borrower_id'],
-					'borrower_loan_id' => $id,
-					'payment_sched' => $newdate,
-					'payment_number' => $i,
-					'amount' => $amount_term
-				)
-			);
-			//$table = $table . '<tr><td>'.$i.'</td><td>'.$amount_term.'</td><td>'.$newdate.'</td></tr>';
 		}
 		
 		//get next payment id and insert to lend_borrower_loans.next_payment_id
