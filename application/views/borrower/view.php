@@ -94,7 +94,20 @@
 		        			<?php foreach ($data_loan->result() as $borrower_loan): ?>
 		        			<tr>
 		        				<td><?php echo anchor('loan/view_info/?id='.$borrower_loan->id, '#'.$borrower_loan->id);?>:</td>
-		        				<td><?php echo $borrower_loan->status;?></td>
+		        				<td><?php 
+		        					switch ($borrower_loan->status) {
+		        						case 'CLOSED':
+		        							echo "<span><strong>".$borrower_loan->status."</strong></span>";
+		        							break;
+		        						case 'ACTIVE':
+		        							echo "<span style='color:RED'><strong>".$borrower_loan->status."</strong></span>";
+		        							break;
+		        						default:
+		        							# code...
+		        							break;
+		        					}
+		        					?>
+		        				</td>
 		        			</tr>
 		        			<?php endforeach; ?>
 		        		<?php else: ?>
@@ -179,7 +192,8 @@
 		        			</tr>
 		        		</table>
 		        		<input type="hidden" name="borrower_id" value="<?php echo $_GET['id']; ?>" />
-		        		</form>  
+		        		</form>
+		        		<?php echo $has_active_loan? "<span class='error'>** Please note that this borrower still has an active loan.<span>" : "" ?>
 	        		</div>
         		</div>   
 			</div>

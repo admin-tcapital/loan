@@ -231,5 +231,20 @@ class Borrower_model extends CI_Model {
 			return FALSE;
 		}
 	}
+
+
+	// --------------------------------------------------------------------
+	
+	function hasActiveLoan($borrower_id)
+	{
+		$result = $this->db->get_where('lend_borrower_loans', array('borrower_id' => $borrower_id, 'status' => 'ACTIVE'));
+		
+		if ($result->num_rows() > 0)
+		{
+			return TRUE;
+		} else {
+			return FALSE;		
+		}
+	}
 	
 }

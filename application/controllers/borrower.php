@@ -42,11 +42,15 @@ class Borrower extends CI_Controller {
 		
 		if($this->form_validation->run() == FALSE)
 		{
+			//check if borrower has active loan
+			$active_loan = $this->Borrower_model->hasActiveLoan($_GET['id']);
+
 			//change validation error delimiters
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 			$this->load->view(
-				'template/main', 
+				'template/main',
 				array(
+					'has_active_loan' => $active_loan,
 					'content'=>'borrower/view', 
 					'location' => 'Borrower / View info', 
 					'menu' => array(
