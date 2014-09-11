@@ -9,6 +9,8 @@ class Loan extends CI_Controller {
 		$this->load->model('Loan_model');
 		
 		$this->load->model('Payment_model');
+
+		$this->load->model('Borrower_model');
 		
 		$this->load->library('logger');
 	}
@@ -48,6 +50,32 @@ class Loan extends CI_Controller {
 	function view_info()
 	{
 		$this->load->view('template/main', array('content' => 'loan/info', 'location' => 'Loan / View', 'menu' => array('Logout' => 'user/logout', 'Report' => 'report/summary', 'Loan' => 'loan/view', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Borrower' => 'borrower', 'Payments' => 'stats/payments', 'Home' => 'stats')));
+	}
+
+	function view_report()
+	{
+		//get loan id
+		if(isset($_GET['id'])) {
+			$loan_id = $_GET['id'];
+			
+			//query loan details
+			$loan = $this->Borrower_model->get_datails($loan_id);
+
+			if($loan) {
+				$name = $this->Borrower_model->get_name($loan->borrower_id);
+				$maturity = $this->Payment_model->get_last_payment($loan->borrower_loan_id);
+				$first_payment = $this->Payment_model->get_first_payment($loan->borrower_loan_id);
+				$payments = $this->Payment_model->get_payments($loan->borrower_loan_id);
+				$html = $this->load->view('report/loan', array('loan' => $loan, 'name' => $name, 'maturity' => $maturity, 'first_payment' => $first_payment, 'payments' => $payments), true);
+
+				require_once("./public/dompdf/dompdf_config.inc.php");
+				
+				$pdf =  new DOMPDF();
+				$pdf->load_html($html);
+				$pdf->render();
+				$pdf->stream($name . "-" . $loan->borrower_loan_id . ".pdf");
+			}
+		}
 	}
 	
 	function add()

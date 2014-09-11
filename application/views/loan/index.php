@@ -13,6 +13,7 @@
 	        				<th>Borrower</th>
 	        				<th>Loan Type</th>
 	        				<th>Status</th>
+	        				<th width="45">Download</th>
 	        			</tr>
 	        		</thead>
 	        		<tbody>
@@ -26,6 +27,7 @@
 	        				<td><a href="<?php echo base_url(); ?>borrower/view/?id=<?php echo $loan->borrower_id;?>"><?php echo $loan->lname.', '.$loan->fname; ?></a></td>
 	        				<td><?php echo $loan->loan_name; ?></td>
 	        				<td><span style="color:<?php echo $loan->status=='ACTIVE' ? 'GREEN' : 'RED'?>"><?php echo $loan->status; ?></span></td>
+	        				<td><a href="<?php echo base_url(); ?>loan/view_report/?id=<?php echo $loan->borrower_loan_id;?>" style="margin-left: 12px;"><img src="<?php echo base_url(); ?>public/css/pdf.png" /></a></td>
 	        			</tr>
 	        			<?php endforeach; ?>
 	        			<?php endif; ?>

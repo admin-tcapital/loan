@@ -9,6 +9,7 @@
 				<?php $this->menu->generate(); ?>
 	        </div>
 	        <div class="rightcontentBody">
+	        	<div class="manage_menu"><a href="<?php echo base_url(); ?>loan/view_report/?id=<?php echo $loan->borrower_loan_id;?>" style="margin-left: 12px;"><img src="<?php echo base_url(); ?>public/css/pdf.png" /></a></div>
         		<div class="frm_container">
 	        		<div class="frm_heading"><span>Loan Info</span></div>
 	        		<div class="frm_inputs">

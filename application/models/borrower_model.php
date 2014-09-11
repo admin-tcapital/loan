@@ -87,6 +87,43 @@ class Borrower_model extends CI_Model {
 			return FALSE;		
 		}
 	}
+
+	// --------------------------------------------------------------------
+	
+	function get_datails($borrower_loan_id)
+	{
+		//$result = $this->db->get_where('lend_borrower_loans', array('id' => $borrower_loan_id));
+
+		$this->db->select('*, lend_borrower_loans.id as borrower_loan_id, lend_borrower_loan_settings.lname as loan_name');
+		$this->db->from('lend_borrower_loans');
+		$this->db->join('lend_borrower_loan_settings', 'lend_borrower_loans.id = lend_borrower_loan_settings.borrower_loan_id');
+		$this->db->join('lend_borrower', 'lend_borrower.id = lend_borrower_loans.borrower_id');
+		$this->db->where('lend_borrower_loans.id', $borrower_loan_id);
+		$result = $this->db->get();
+
+		if ($result->num_rows() > 0)
+		{
+			return $result->row();
+		} else {
+			return FALSE;		
+		}
+	}
+
+	// --------------------------------------------------------------------
+	
+	function get_name($borrower_id)
+	{
+		$result = $this->db->get_where('lend_borrower', array('id' => $borrower_id));
+		
+		if ($result->num_rows() > 0)
+		{
+			$borrower = $result->row();
+			
+			return $borrower->lname . ', ' . $borrower->fname . ' ' . $borrower->mi;
+		} else {
+			return FALSE;		
+		}
+	}
 	
 	// --------------------------------------------------------------------
 	

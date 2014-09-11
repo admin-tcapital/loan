@@ -198,5 +198,74 @@ class Payment_model extends CI_Model {
 		//if something went wrong return FALSE
 		return FALSE;
 	}
+
+
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Get last payment date
+	 * 
+	 */
+	function get_last_payment($borrower_loan_id)
+	{
+		//get last payment info
+		$this->db->from('lend_payments');
+		$this->db->where(array('borrower_loan_id' => $borrower_loan_id));
+		$this->db->order_by('payment_sched', 'DESC');
+		$this->db->limit(1);
+		$result = $this->db->get();
+		
+		if ($result->num_rows() > 0) {
+			$payment = $result->row();
+			return $payment->payment_sched;
+		}
+		
+		return FALSE;
+	}
+
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Get first payment date
+	 * 
+	 */
+	function get_first_payment($borrower_loan_id)
+	{
+		//get first payment info
+		$this->db->from('lend_payments');
+		$this->db->where(array('borrower_loan_id' => $borrower_loan_id));
+		$this->db->order_by('payment_sched');
+		$this->db->limit(1);
+		$result = $this->db->get();
+		
+		if ($result->num_rows() > 0) {
+			$payment = $result->row();
+			return $payment->payment_sched;
+		}
+		
+		return FALSE;
+	}
+
+
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Get first payment date
+	 * 
+	 */
+	function get_payments($borrower_loan_id)
+	{
+		//get first payment info
+		$this->db->from('lend_payments');
+		$this->db->where(array('borrower_loan_id' => $borrower_loan_id));
+		$this->db->order_by('payment_number');
+		$result = $this->db->get();
+		
+		if ($result->num_rows() > 0) {
+			return $result->result();
+		}
+		
+		return FALSE;
+	}
 	
 }
