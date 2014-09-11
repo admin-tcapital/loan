@@ -105,11 +105,11 @@ class Logger {
     	</table>
     	<!-- pager -->
 		<div class='logger_pager'>
-		    <img src='".base_url()."css/tablesorter/first.png' class='first'/>
-		    <img src='".base_url()."css/tablesorter/prev.png' class='prev'/>
+		    <img src='".base_url()."public/css/tablesorter/first.png' class='first'/>
+		    <img src='".base_url()."public/css/tablesorter/prev.png' class='prev'/>
 		    <span class='pagedisplay'></span> <!-- this can be any element, including an input -->
-		    <img src='".base_url()."css/tablesorter/next.png' class='next'/>
-		    <img src='".base_url()."css/tablesorter/last.png' class='last'/>
+		    <img src='".base_url()."public/css/tablesorter/next.png' class='next'/>
+		    <img src='".base_url()."public/css/tablesorter/last.png' class='last'/>
 		    <select class='pagesize'>
 		        <option value='20'>20</option>
 		        <option value='30'>30</option>

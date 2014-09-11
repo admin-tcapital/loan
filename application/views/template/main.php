@@ -14,24 +14,24 @@
 <link rel="shortcut icon" href="<?php echo base_url(); ?>fav.ico" />
 
 <!-- General CSS -->
-<link type="text/css" href="<?php echo base_url(); ?>css/style.css" rel="stylesheet" />
+<link type="text/css" href="<?php echo base_url(); ?>public/css/style.css" rel="stylesheet" />
 
 <!-- jQuery -->
-<script type="text/javascript" src="<?php echo base_url() ?>jquery/jquery-1.6.4-min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>public/jquery/jquery-1.6.4-min.js"></script>
 
 <!-- jQuery-UI -->
-<link type="text/css" href="<?php echo base_url(); ?>css/jquery-ui/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
-<script type="text/javascript" src="<?php echo base_url() ?>jquery/jquery-ui-1.8.16.custom.min.js"></script>
+<link type="text/css" href="<?php echo base_url(); ?>public/css/jquery-ui/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="<?php echo base_url() ?>public/jquery/jquery-ui-1.8.16.custom.min.js"></script>
 
 <!-- Color Box -->
-<script type="text/javascript" src="<?php echo base_url() ?>jquery/plugins/colorbox/jquery.colorbox-min.js"></script>
-<link type="text/css" href="<?php echo base_url(); ?>jquery/plugins/colorbox/colorbox.css" rel="stylesheet" />
+<script type="text/javascript" src="<?php echo base_url() ?>public/jquery/plugins/colorbox/jquery.colorbox-min.js"></script>
+<link type="text/css" href="<?php echo base_url(); ?>public/jquery/plugins/colorbox/colorbox.css" rel="stylesheet" />
 
 <!-- Table Sorter -->
-<link type="text/css" href="<?php echo base_url(); ?>css/tablesorter/style.css" rel="stylesheet" />
-<script type="text/javascript" src="<?php echo base_url() ?>jquery/plugins/jquery.tablesorter.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url() ?>jquery/plugins/jquery.tablesorter.pager.js"></script>
-<script type="text/javascript" src="<?php echo base_url() ?>jquery/plugins/jquery.tablesorter.widgets.min.js"></script>
+<link type="text/css" href="<?php echo base_url(); ?>public/css/tablesorter/style.css" rel="stylesheet" />
+<script type="text/javascript" src="<?php echo base_url() ?>public/jquery/plugins/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>public/jquery/plugins/jquery.tablesorter.pager.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>public/jquery/plugins/jquery.tablesorter.widgets.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$( '.button_edit' ).button({ icons: {primary:'ui-icon-pencil'} });

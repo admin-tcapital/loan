@@ -35,11 +35,11 @@
 			        	</table>
 			        	<!-- pager -->
 						<div class='past_due_pager'>
-						    <img src='<?php echo base_url(); ?>css/tablesorter/first.png' class='first'/>
-						    <img src='<?php echo base_url(); ?>css/tablesorter/prev.png' class='prev'/>
+						    <img src='<?php echo base_url(); ?>public/css/tablesorter/first.png' class='first'/>
+						    <img src='<?php echo base_url(); ?>public/css/tablesorter/prev.png' class='prev'/>
 						    <span class='pagedisplay'></span> <!-- this can be any element, including an input -->
-						    <img src='<?php echo base_url(); ?>css/tablesorter/next.png' class='next'/>
-						    <img src='<?php echo base_url(); ?>css/tablesorter/last.png' class='last'/>
+						    <img src='<?php echo base_url(); ?>public/css/tablesorter/next.png' class='next'/>
+						    <img src='<?php echo base_url(); ?>public/css/tablesorter/last.png' class='last'/>
 						    <select class='pagesize'>
 						        <option value='20'>20</option>
 						        <option value='30'>30</option>
@@ -80,11 +80,11 @@
 			        	</table>
 			        	<!-- pager -->
 						<div class='due_now_pager'>
-						    <img src='<?php echo base_url(); ?>css/tablesorter/first.png' class='first'/>
-						    <img src='<?php echo base_url(); ?>css/tablesorter/prev.png' class='prev'/>
+						    <img src='<?php echo base_url(); ?>public/css/tablesorter/first.png' class='first'/>
+						    <img src='<?php echo base_url(); ?>public/css/tablesorter/prev.png' class='prev'/>
 						    <span class='pagedisplay'></span> <!-- this can be any element, including an input -->
-						    <img src='<?php echo base_url(); ?>css/tablesorter/next.png' class='next'/>
-						    <img src='<?php echo base_url(); ?>css/tablesorter/last.png' class='last'/>
+						    <img src='<?php echo base_url(); ?>public/css/tablesorter/next.png' class='next'/>
+						    <img src='<?php echo base_url(); ?>public/css/tablesorter/last.png' class='last'/>
 						    <select class='pagesize'>
 						        <option value='20'>20</option>
 						        <option value='30'>30</option>
@@ -125,11 +125,11 @@
 			        	</table>
 			        	<!-- pager -->
 						<div class='due_week_pager'>
-						    <img src='<?php echo base_url(); ?>css/tablesorter/first.png' class='first'/>
-						    <img src='<?php echo base_url(); ?>css/tablesorter/prev.png' class='prev'/>
+						    <img src='<?php echo base_url(); ?>public/css/tablesorter/first.png' class='first'/>
+						    <img src='<?php echo base_url(); ?>public/css/tablesorter/prev.png' class='prev'/>
 						    <span class='pagedisplay'></span> <!-- this can be any element, including an input -->
-						    <img src='<?php echo base_url(); ?>css/tablesorter/next.png' class='next'/>
-						    <img src='<?php echo base_url(); ?>css/tablesorter/last.png' class='last'/>
+						    <img src='<?php echo base_url(); ?>public/css/tablesorter/next.png' class='next'/>
+						    <img src='<?php echo base_url(); ?>public/css/tablesorter/last.png' class='last'/>
 						    <select class='pagesize'>
 						        <option value='20'>20</option>
 						        <option value='30'>30</option>
